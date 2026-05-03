@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const issues = await getCollection('issues');
+issues.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const leverStyles: Record<string, string> = {
+  smiley: 'background:#E6F1FB;color:#0C447C;',
+  morales: 'background:#FCEBEB;color:#791F1F;',
+  both: 'background:#F1EFE8;color:#5F5E5A;',
+  none: 'background:#F1EFE8;color:#888780;',
+};
+
+const statStyles: Record<string, string> = {
+  danger: 'background:#FCEBEB;color:#791F1F;',
+  warning: 'background:#FFF8E7;color:#633806;',
+  success: 'background:#EAF3DE;color:#27500A;',
+};
+
+const salienceColors: Record<string, string> = {
+  high: '#C8102E',
+  medium: '#E8A020',
+  structural: '#888780',
+};
+---
+<Layout title="Issues" currentPath="/">
+
+  <!-- HERO -->
+  <div class="hero-stripe">
+    <div class="container">
+      <h1>Providence deserves<br/>better answers.</h1>
+      <p class="subtitle">Rents are up. Schools are still under state control. The city budget is squeezed. This September, voters choose who leads Providence through it — and we want that choice to be an informed one.</p>
+      <p class="meta">Democratic Primary · September 9, 2026 · Smiley vs. Morales</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom: 80px;">
+
+    <div class="section-rule"><span>What's at stake</span></div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+      <span style="font-size:0.78rem;color:var(--ink-faint);">We cover Smiley & Morales — the two candidates with a real path to winning. <a href="/candidates" style="color:var(--pvd-red);">About this choice →</a></span>
+      <div style="display:flex;gap:14px;font-size:0.7rem;color:var(--ink-faint);align-items:center;flex-wrap:wrap;">
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#C8102E;display:inline-block;"></span>Voters care most</span>
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#E8A020;display:inline-block;"></span>Also important</span>
+        <span style="display:flex;align-items:center;gap:4px;"><span style="width:7px;height:7px;border-radius:50%;background:#888780;display:inline-block;"></span>Less visible, high stakes</span>
+      </div>
+    </div>
+
+    <div class="accordion">
+      {issues.map((issue, i) => {
+        const d = issue.data;
+        const dotColor = salienceColors[d.salience ?? 'structural'];
+        const statStyle = statStyles[d.stat_type ?? 'warning'];
+        return (
+          <div class="acc-item">
+            <div class="acc-header">
+              <div class="acc-left">
+                <span class="sal-dot" style={`background:${dotColor};`}></span>
+                <h2 class="acc-title">{d.title}</h2>
+              </div>
+              <div class="acc-right">
+                {d.stat && (
+                  <span class="stat-pill" style={statStyle}>{d.stat}</span>
+                )}
+                <span class="acc-chevron">▼</span>
+              </div>
+            </div>
+
+            <div class="acc-body">
+              <p class="acc-summary">{d.summary}</p>
+
+              {d.levers && d.levers.length > 0 && (
+                <div class="levers-block">
+                  <p class="levers-label">The debate</p>
+                  <div class="levers-list">
+                    {d.levers.map((lever: any) => (
+                      <div class="lever-row">
+                        <span class="lever-name">{lever.name}</span>
+                        <a href={`/issues/${issue.slug}#${lever.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`} class="lever-tag" style={leverStyles[lever.type]}>{lever.tag} →</a>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px;flex-wrap:wrap;gap:8px;">
+                <a href={`/issues/${issue.slug}`} class="acc-cta">Read the full analysis →</a>
+                {d.updated && (
+                  <span style="font-size:0.68rem;color:var(--ink-faint);">
+                    Updated {new Date(d.updated).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+.accordion { display: flex; flex-direction: column; gap: 8px; }
+.acc-item { border: 1px solid var(--rule); background: var(--bg-white); }
+.acc-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; cursor: pointer; gap: 16px; user-select: none; }
+.acc-header:hover { background: #F5F4F1; }
+.acc-left { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
+.sal-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.acc-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.1rem; font-weight: 400; margin: 0; line-height: 1.2; }
+.acc-right { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.stat-pill { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; padding: 4px 10px; border-radius: 20px; white-space: nowrap; }
+.acc-chevron { font-size: 0.65rem; color: var(--ink-faint); transition: transform 0.18s; flex-shrink: 0; }
+.acc-chevron.open { transform: rotate(180deg); }
+.acc-body { display: none; padding: 0 24px 20px; border-top: 1px solid var(--rule); }
+.acc-body.open { display: block; }
+.acc-summary { font-size: 0.92rem; line-height: 1.7; color: var(--ink); margin: 16px 0 0; font-style: italic; }
+.levers-block { margin-top: 18px; }
+.levers-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 8px; }
+.levers-list { display: flex; flex-direction: column; }
+.lever-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.lever-row:last-child { border-bottom: none; }
+.lever-name { font-size: 0.82rem; color: var(--ink); flex: 1; }
+.lever-tag { font-size: 0.68rem; font-weight: 600; padding: 3px 9px; border-radius: 3px; white-space: nowrap; letter-spacing: 0.02em; text-decoration: none; }
+.lever-tag:hover { opacity: 0.8; }
+.acc-cta { display: inline-block; font-size: 0.78rem; color: var(--pvd-red); border-bottom: 1px solid var(--pvd-red); padding-bottom: 1px; }
+.acc-cta:hover { opacity: 0.7; }
+@media (max-width: 560px) {
+  .stat-pill { display: none; }
+  .acc-header { padding: 14px 16px; }
+  .acc-body { padding: 0 16px 16px; }
+}
+</style>
+
+<script>
+  document.querySelectorAll('.acc-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const body = header.nextElementSibling as HTMLElement;
+      const chev = header.querySelector('.acc-chevron') as HTMLElement;
+      const isOpen = body.classList.contains('open');
+      document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.acc-chevron').forEach(c => c.classList.remove('open'));
+      if (!isOpen) { body.classList.add('open'); chev.classList.add('open'); }
+    });
+  });
+</script>

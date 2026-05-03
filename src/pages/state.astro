@@ -1,0 +1,380 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="State of the City" description="What's actually happening in Providence in 2026 — the headline numbers and the deeper story." currentPath="/state">
+  <div class="hero-stripe">
+    <div class="container">
+      <h1>State of the City</h1>
+      <p class="subtitle">What's actually happening in Providence right now. Start with the headline. Dig deeper when you want to.</p>
+      <p class="meta">All figures sourced · Updated April 2026</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:80px;">
+
+    <!-- DASHBOARD -->
+    <div class="section-rule"><span>At a glance</span></div>
+    <p style="font-size:0.82rem;color:var(--ink-faint);margin-bottom:20px;">Click any indicator to learn more.</p>
+
+    <div class="dashboard">
+      <a href="#housing" class="dash-card" onclick="openSection('housing')">
+        <div class="dash-signal red"></div>
+        <div class="dash-number">+12.6%</div>
+        <div class="dash-label">Rent increase in 2024</div>
+        <div class="dash-sub">Largest of any U.S. metro</div>
+      </a>
+      <a href="#budget" class="dash-card" onclick="openSection('budget')">
+        <div class="dash-signal red"></div>
+        <div class="dash-number">~35%</div>
+        <div class="dash-label">Property that pays no taxes</div>
+        <div class="dash-sub">Universities, hospitals, nonprofits</div>
+      </a>
+      <a href="#safety" class="dash-card" onclick="openSection('safety')">
+        <div class="dash-signal green"></div>
+        <div class="dash-number">−10%</div>
+        <div class="dash-label">Violent crime in 2024</div>
+        <div class="dash-sub">Lowest level since 1990</div>
+      </a>
+      <a href="#schools" class="dash-card" onclick="openSection('schools')">
+        <div class="dash-signal red"></div>
+        <div class="dash-number">7 yrs</div>
+        <div class="dash-label">State control of schools</div>
+        <div class="dash-sub">No exit timeline exists</div>
+      </a>
+      <a href="#transit" class="dash-card" onclick="openSection('transit')">
+        <div class="dash-signal amber"></div>
+        <div class="dash-number">−13%</div>
+        <div class="dash-label">RIPTA ridership vs. 2019</div>
+        <div class="dash-sub">Still below pre-pandemic</div>
+      </a>
+      <a href="#food" class="dash-card" onclick="openSection('food')">
+        <div class="dash-signal red"></div>
+        <div class="dash-number">23%</div>
+        <div class="dash-label">Residents on SNAP</div>
+        <div class="dash-sub">Federal cuts hitting now</div>
+      </a>
+    </div>
+
+    <div style="display:flex;gap:20px;margin:16px 0 40px;font-size:0.72rem;color:var(--ink-faint);">
+      <span style="display:flex;align-items:center;gap:5px;"><span class="dash-signal red" style="position:static;width:10px;height:10px;border-radius:50%;"></span>Crisis / urgent</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span class="dash-signal amber" style="position:static;width:10px;height:10px;border-radius:50%;"></span>Concerning</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span class="dash-signal green" style="position:static;width:10px;height:10px;border-radius:50%;"></span>Moving in right direction</span>
+    </div>
+
+    <!-- DEEP DIVES -->
+    <div class="section-rule"><span>The deeper story</span></div>
+
+    <div class="accordion">
+
+      <!-- HOUSING -->
+      <div class="acc-item" id="housing">
+        <div class="acc-header">
+          <div class="acc-left">
+            <span class="acc-title">Housing</span>
+            <span class="acc-pill" style="background:#FCEBEB;color:#791F1F;">Crisis</span>
+          </div>
+          <div class="acc-meta">Rents up 12.6% in 2024 · Largest of any U.S. metro</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">Providence rents rose faster than any major U.S. city last year. A typical household here can afford about $1,675/month. The median asking rent is $2,145 — a gap of $470 every month.</p>
+          <div class="sotc-stats">
+            <div class="stat-block"><div class="stat-number">$2,145</div><div class="stat-label">Median asking rent (Dec 2024)</div></div>
+            <div class="stat-block"><div class="stat-number">+12.6%</div><div class="stat-label">Year-over-year rent increase — largest of any major U.S. metro</div></div>
+            <div class="stat-block"><div class="stat-number">$476/mo</div><div class="stat-label">Gap between what a median-income household can afford and what rent costs</div></div>
+            <div class="stat-block"><div class="stat-number">Lowest</div><div class="stat-label">Rhode Island's per-capita home construction rate — in the country</div></div>
+          </div>
+          <p style="font-size:0.88rem;color:var(--ink-light);line-height:1.7;margin-bottom:12px;">Part of what's driving this: remote workers priced out of Boston who can work from anywhere are moving to Providence and competing for the same housing stock as residents earning Providence wages. The city can't build its way out of this overnight — RI builds less housing per capita than almost any state.</p>
+          <div class="sotc-flag">⚠ Neither candidate has addressed the Boston migration driver. Both are focused on tools that work on a 5–10 year horizon. Renters today are on their own in the short term.</div>
+          <div class="sotc-sources">
+            <span>Sources:</span>
+            <a href="https://www.boston.com/real-estate/renting/2025/01/29/providence-median-rent-skyrockets/" target="_blank">Boston Globe / Rent.com (Jan 2025)</a>
+            <a href="https://data.census.gov" target="_blank">U.S. Census Bureau ACS 2023</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- CITY BUDGET -->
+      <div class="acc-item" id="budget">
+        <div class="acc-header">
+          <div class="acc-left">
+            <span class="acc-title">City Budget</span>
+            <span class="acc-pill" style="background:#FCEBEB;color:#791F1F;">Structurally squeezed</span>
+          </div>
+          <div class="acc-meta">Fixed costs rising faster than the city can raise taxes</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">The city doesn't have much money. That's not spin — it's structure. Three things are eating the budget: pensions, school funding, and healthcare. Together they're rising faster than the law allows the city to raise taxes.</p>
+
+          <!-- Level 2: The three drivers -->
+          <div class="level-two-grid">
+            <div class="driver-card">
+              <div class="driver-icon">📋</div>
+              <div class="driver-title">Pensions</div>
+              <div class="driver-summary">Payments to retired city workers, locked in by contract. Growing every year.</div>
+              <button class="driver-expand" onclick="toggleDriver('pensions')">What's the pension situation? ↓</button>
+              <div class="driver-detail" id="pensions">
+                <p>A pension is a guaranteed monthly payment to a retired employee for the rest of their life. Providence promised pensions to police, firefighters, and other city workers over many decades. Those promises are now coming due at scale as the workforce ages.</p>
+                <p>The city has an "unfunded pension liability" — the gap between what it has saved and what it has promised. This gap runs into the hundreds of millions. Every year, the city must make a required contribution to close that gap, regardless of what else is happening in the budget.</p>
+                <p>This isn't unique to Providence — it's a crisis across American cities. But Providence's tax-exempt property problem makes it harder to fund than most. The next mayor inherits this obligation. It cannot be wished away.</p>
+                <p style="font-weight:500;color:var(--ink);">What neither candidate is saying: There is no short-term fix. Any honest budget conversation has to acknowledge that pension obligations will constrain city spending for at least the next decade.</p>
+              </div>
+            </div>
+            <div class="driver-card">
+              <div class="driver-icon">🏫</div>
+              <div class="driver-title">School funding</div>
+              <div class="driver-summary">The city pays $146.5M/year — $11M more than before after a 2024 lawsuit settlement.</div>
+              <button class="driver-expand" onclick="toggleDriver('schools-budget')">Why did this go up? ↓</button>
+              <div class="driver-detail" id="schools-budget">
+                <p>When the state took over Providence schools in 2019, there was a dispute about who owed what during receivership. The city argued it was paying too much; the state argued the city wasn't meeting its legal obligations.</p>
+                <p>In 2024, they settled. Providence now pays $146.5M per year — an additional $11M above prior levels — locked in for multiple years. This is a fixed cost the next mayor cannot renegotiate.</p>
+                <p>The cruel irony: the city is paying more for schools it doesn't control. Both candidates agree this is a problem. Neither has secured a state commitment to accelerate the return of local control.</p>
+              </div>
+            </div>
+            <div class="driver-card">
+              <div class="driver-icon">🏥</div>
+              <div class="driver-title">Healthcare</div>
+              <div class="driver-summary">City employee and retiree healthcare costs rise faster than inflation every year.</div>
+              <button class="driver-expand" onclick="toggleDriver('healthcare')">Tell me more ↓</button>
+              <div class="driver-detail" id="healthcare">
+                <p>Providence, like every employer, pays for health insurance for its active employees and many retirees. Healthcare costs in the U.S. grow at 5–8% per year — consistently faster than inflation and faster than the city's tax levy growth cap.</p>
+                <p>This is a slow squeeze that rarely makes headlines but never goes away. It means that even in years where nothing dramatic happens, the city is losing ground — more money going to healthcare, less available for everything else.</p>
+                <p>Neither candidate has proposed a specific strategy for managing healthcare cost growth. It's the unglamorous budget pressure that always loses to the headline issues.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Level 2: Tax-exempt property -->
+          <div style="margin-top:24px;">
+            <p class="level-two-header">Why can't the city just raise more money?</p>
+            <p style="font-size:0.88rem;color:var(--ink-light);line-height:1.7;margin-bottom:12px;">Two reasons. First, state law caps how much Providence can increase its tax levy each year — the city can't just raise property taxes freely. Second, about 35% of Providence property is tax-exempt. Brown University, RISD, Rhode Island Hospital, dozens of nonprofits — they don't pay property taxes. That shrinks the taxable base dramatically compared to a city of similar size without major universities and hospitals.</p>
+            <p style="font-size:0.88rem;color:var(--ink-light);line-height:1.7;margin-bottom:12px;">Smiley negotiated a $223M PILOT agreement with Providence's colleges and universities — voluntary payments in lieu of taxes. That's real and significant. But it's still far less than full taxation would yield.</p>
+            <div class="sotc-flag">⚠ The city budget is structurally constrained in ways that neither candidate fully acknowledges. Every dollar spent on one thing is a dollar not spent on another. Voters should ask both candidates: what specifically are you cutting to pay for what you're promising?</div>
+          </div>
+
+          <div class="sotc-stats" style="margin-top:20px;">
+            <div class="stat-block"><div class="stat-number">$21M+</div><div class="stat-label">Increase in fixed costs in FY2026 budget alone</div></div>
+            <div class="stat-block"><div class="stat-number">$223M</div><div class="stat-label">PILOT deal with universities — doubled prior contributions</div></div>
+            <div class="stat-block"><div class="stat-number">~35%</div><div class="stat-label">Share of Providence property that is tax-exempt</div></div>
+            <div class="stat-block"><div class="stat-number">$304M</div><div class="stat-label">Projected RI state structural deficit by FY2027 — limits state aid capacity</div></div>
+          </div>
+          <div class="sotc-sources">
+            <span>Sources:</span>
+            <a href="https://council.providenceri.gov/city-budget-process-and-property-revaluations-2025-2026/" target="_blank">Providence City Council budget explainer (2025)</a>
+            <a href="https://ripec.org/2025-fy2026-budget/" target="_blank">RIPEC FY2026 state budget analysis</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- PUBLIC SAFETY -->
+      <div class="acc-item" id="safety">
+        <div class="acc-header">
+          <div class="acc-left">
+            <span class="acc-title">Public Safety</span>
+            <span class="acc-pill" style="background:#EAF3DE;color:#27500A;">Improving</span>
+          </div>
+          <div class="acc-meta">Violent crime at 30-year low · Progress is real but uneven</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">Violent crime fell 10% in 2024 to its lowest level since 1990. That's genuinely good news. But it's a citywide average — some neighborhoods still feel very different from that number.</p>
+          <div class="sotc-stats">
+            <div class="stat-block"><div class="stat-number">−10%</div><div class="stat-label">Violent crime drop in 2024 vs. 2023</div></div>
+            <div class="stat-block"><div class="stat-number">293</div><div class="stat-label">Violent incidents Jan–Jun 2025 (vs. 345 same period 2024)</div></div>
+            <div class="stat-block"><div class="stat-number">325</div><div class="stat-label">Firearms seized in 2024 — highest since 2006</div></div>
+            <div class="stat-block"><div class="stat-number">11</div><div class="stat-label">Homicides in 2024, down from 14 in 2023</div></div>
+          </div>
+          <p style="font-size:0.88rem;color:var(--ink-light);line-height:1.7;margin-bottom:12px;">The national violent crime rate also dropped in 2023–24, so Providence's improvement isn't purely a local story. PPD's targeted enforcement deserves credit for the gun work — 325 seizures is significant. Whether it's driving the crime trend is harder to say.</p>
+          <div class="sotc-flag">⚠ The trend is good. The baseline is still above the national average. And neither candidate has addressed the upcoming police union contract — which will determine more about policing in Providence than any campaign promise.</div>
+          <div class="sotc-sources">
+            <span>Sources:</span>
+            <a href="https://turnto10.com/news/local/providence-police-chief-perez-discusses-2024-crime-statistics-department-firearms-seizure-assualts-robberies-guns-force-streets-march-19-2025" target="_blank">WJAR / PPD Chief Perez (Mar 2025)</a>
+            <a href="https://www.wpri.com/target-12/crime-tracker-violent-crime-in-providence-down-in-the-first-half-of-2025/" target="_blank">WPRI crime tracker (Jul 2025)</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCHOOLS -->
+      <div class="acc-item" id="schools">
+        <div class="acc-header">
+          <div class="acc-left">
+            <span class="acc-title">Public Schools</span>
+            <span class="acc-pill" style="background:#FCEBEB;color:#791F1F;">State control</span>
+          </div>
+          <div class="acc-meta">7 years of state receivership · No exit timeline</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">The state has run Providence schools since 2019. The city writes a $146.5 million check every year — but doesn't make decisions about curriculum, staffing, or operations. Seven years in, there's no published plan for when that changes.</p>
+          <div class="sotc-stats">
+            <div class="stat-block"><div class="stat-number">2019</div><div class="stat-label">Year state took over following Johns Hopkins report</div></div>
+            <div class="stat-block"><div class="stat-number">$146.5M</div><div class="stat-label">City contribution to schools annually</div></div>
+            <div class="stat-block"><div class="stat-number">7 yrs</div><div class="stat-label">Duration of receivership — no firm exit date</div></div>
+            <div class="stat-block"><div class="stat-number">2030</div><div class="stat-label">Smiley's target: every student in new/renovated building</div></div>
+          </div>
+          <div class="sotc-flag">⚠ The mayor can advocate and fund construction. But the schools are run by the state. Any education promise from either candidate is constrained by this — and neither has secured a state commitment to accelerate the return of local control.</div>
+          <div class="sotc-sources">
+            <span>Sources:</span>
+            <a href="https://council.providenceri.gov/city-budget-process-and-property-revaluations-2025-2026/" target="_blank">Providence City Council budget explainer (2025)</a>
+            <a href="https://www.ride.ri.gov" target="_blank">Rhode Island Department of Education</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRANSPORTATION -->
+      <div class="acc-item" id="transit">
+        <div class="acc-header">
+          <div class="acc-left">
+            <span class="acc-title">Transportation</span>
+            <span class="acc-pill" style="background:#FFF8E7;color:#633806;">Underfunded</span>
+          </div>
+          <div class="acc-meta">23% of households car-free · RIPTA still below pre-pandemic</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">Almost one in four Providence households doesn't own a car. They depend on RIPTA — a state agency the mayor can't actually control. Ridership still hasn't recovered from 2020 and the funding gap is real.</p>
+          <div class="sotc-stats">
+            <div class="stat-block"><div class="stat-number">23%</div><div class="stat-label">Providence households without a car</div></div>
+            <div class="stat-block"><div class="stat-number">−13%</div><div class="stat-label">RIPTA ridership vs. 2019 pre-pandemic level</div></div>
+            <div class="stat-block"><div class="stat-number">2023</div><div class="stat-label">Washington Bridge partial collapse — infrastructure backlog exposed</div></div>
+          </div>
+          <div class="sotc-flag">⚠ The mayor's direct authority over transit is limited to local roads and pedestrian infrastructure. RIPTA is a state budget fight. Neither candidate has explained how they'll win that fight.</div>
+          <div class="sotc-sources">
+            <span>Sources:</span>
+            <a href="https://ripec.org/2025-fy2026-budget/" target="_blank">RIPEC FY2026 budget analysis</a>
+            <a href="https://data.census.gov" target="_blank">U.S. Census Bureau</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- FOOD SECURITY -->
+      <div class="acc-item" id="food">
+        <div class="acc-header">
+          <div class="acc-left">
+            <span class="acc-title">Food Security</span>
+            <span class="acc-pill" style="background:#FCEBEB;color:#791F1F;">Under federal pressure</span>
+          </div>
+          <div class="acc-meta">23% on SNAP · 16,000 children affected by cuts</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">About 23% of Providence residents rely on federal food benefits. The Trump administration is cutting them. The mayor can't stop that — but how the city responds to a sustained federal pullback matters a lot.</p>
+          <div class="sotc-stats">
+            <div class="stat-block"><div class="stat-number">23%</div><div class="stat-label">Providence residents enrolled in SNAP (Nov 2025)</div></div>
+            <div class="stat-block"><div class="stat-number">16,000</div><div class="stat-label">Children in Providence who have had food benefits cut</div></div>
+          </div>
+          <div class="sotc-flag">⚠ This is a present emergency, not a future risk. Neither candidate has specified what a city-level emergency food plan looks like or what it costs.</div>
+          <div class="sotc-sources">
+            <span>Sources:</span>
+            <a href="https://www.browndailyherald.com/article/2026/04/providence-mayoral-candidates-share-stances-on-housing-immigration-transit-at-brown-community-forum" target="_blank">Brown Daily Herald — forum (Apr 2026)</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+/* Dashboard */
+.dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 8px; }
+.dash-card { background: var(--bg-white); border: 1px solid var(--rule); padding: 18px 16px; text-decoration: none; color: var(--ink); display: block; transition: border-color 0.15s, box-shadow 0.15s; position: relative; }
+.dash-card:hover { border-color: var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+.dash-signal { width: 8px; height: 8px; border-radius: 50%; margin-bottom: 10px; }
+.dash-signal.red { background: #C8102E; }
+.dash-signal.amber { background: #E8A020; }
+.dash-signal.green { background: #2D9B5A; }
+.dash-number { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.6rem; line-height: 1; margin-bottom: 6px; color: var(--ink); }
+.dash-label { font-size: 0.78rem; font-weight: 500; color: var(--ink); line-height: 1.3; margin-bottom: 4px; }
+.dash-sub { font-size: 0.7rem; color: var(--ink-faint); line-height: 1.3; }
+
+/* Accordion */
+.accordion { display: flex; flex-direction: column; gap: 8px; }
+.acc-item { border: 1px solid var(--rule); background: var(--bg-white); }
+.acc-header { display: flex; align-items: center; gap: 16px; padding: 18px 24px; cursor: pointer; user-select: none; }
+.acc-header:hover { background: #F5F4F1; }
+.acc-left { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.acc-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.1rem; font-weight: 400; margin: 0; }
+.acc-pill { font-size: 0.68rem; font-weight: 600; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.03em; white-space: nowrap; }
+.acc-meta { font-size: 0.78rem; color: var(--ink-faint); flex: 1; }
+.acc-chevron { font-size: 0.65rem; color: var(--ink-faint); transition: transform 0.18s; flex-shrink: 0; }
+.acc-chevron.open { transform: rotate(180deg); }
+.acc-body { display: none; border-top: 1px solid var(--rule); padding: 24px; }
+.acc-body.open { display: block; }
+
+/* Level labels */
+.level-one { font-size: 1rem; line-height: 1.65; color: var(--ink); margin: 0 0 20px; font-style: italic; }
+.level-two-header { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.05rem; margin: 0 0 10px; }
+
+/* Stats */
+.sotc-stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 20px; }
+.stat-block { background: var(--bg-white); padding: 18px 16px; }
+.stat-number { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.6rem; line-height: 1; color: var(--pvd-red); margin-bottom: 6px; }
+.stat-label { font-size: 0.73rem; line-height: 1.45; color: var(--ink-light); }
+
+/* Flag */
+.sotc-flag { background: #FFF8E7; border-left: 3px solid var(--pvd-gold); padding: 10px 14px; font-size: 0.83rem; line-height: 1.6; color: var(--ink); margin: 16px 0; }
+
+/* Sources */
+.sotc-sources { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; font-size: 0.7rem; color: var(--ink-faint); padding-top: 16px; margin-top: 16px; border-top: 1px solid var(--rule); }
+.sotc-sources span { letter-spacing: 0.06em; text-transform: uppercase; }
+.sotc-sources a { color: var(--pvd-red); text-decoration: underline; text-underline-offset: 2px; }
+
+/* Level 2: driver cards */
+.level-two-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 20px 0; }
+.driver-card { border: 1px solid var(--rule); padding: 18px; background: var(--bg-white); }
+.driver-icon { font-size: 1.2rem; margin-bottom: 8px; }
+.driver-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 1rem; margin-bottom: 6px; }
+.driver-summary { font-size: 0.8rem; color: var(--ink-light); line-height: 1.55; margin-bottom: 12px; }
+.driver-expand { background: none; border: none; color: var(--pvd-red); font-size: 0.78rem; cursor: pointer; padding: 0; font-family: 'Newsreader', serif; text-align: left; }
+.driver-expand:hover { opacity: 0.7; }
+.driver-detail { display: none; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.driver-detail.open { display: block; }
+.driver-detail p { font-size: 0.82rem; color: var(--ink-light); line-height: 1.65; margin-bottom: 10px; }
+.driver-detail p:last-child { margin-bottom: 0; }
+
+@media (max-width: 600px) {
+  .dashboard { grid-template-columns: 1fr 1fr; }
+  .acc-meta { display: none; }
+  .acc-header, .acc-body { padding: 14px 16px; }
+  .level-two-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<script>
+  function openSection(id: string) {
+    const item = document.getElementById(id);
+    if (!item) return;
+    const body = item.querySelector('.acc-body') as HTMLElement;
+    const chev = item.querySelector('.acc-chevron') as HTMLElement;
+    if (body && !body.classList.contains('open')) {
+      body.classList.add('open');
+      chev?.classList.add('open');
+    }
+  }
+  (window as any).openSection = openSection;
+
+  function toggleDriver(id: string) {
+    const detail = document.getElementById(id);
+    if (!detail) return;
+    const isOpen = detail.classList.contains('open');
+    detail.classList.toggle('open');
+    const btn = detail.previousElementSibling as HTMLElement;
+    if (btn) btn.textContent = isOpen
+      ? btn.textContent!.replace('↑', '↓')
+      : btn.textContent!.replace('↓', '↑');
+  }
+  (window as any).toggleDriver = toggleDriver;
+
+  document.querySelectorAll('.acc-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const body = header.nextElementSibling as HTMLElement;
+      const chev = header.querySelector('.acc-chevron') as HTMLElement;
+      const isOpen = body.classList.contains('open');
+      document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.acc-chevron').forEach(c => c.classList.remove('open'));
+      if (!isOpen) { body.classList.add('open'); chev.classList.add('open'); }
+    });
+  });
+</script>

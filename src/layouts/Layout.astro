@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+  currentPath?: string;
+}
+const { title, description = "An independent analytical resource on the 2026 Providence mayoral race.", currentPath = "/" } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <title>{title} — PVD Mayor 2026</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <div class="inner">
+        <a href="/" class="site-logo">PVD <span>MAYOR</span> 2026</a>
+        <nav class="site-nav">
+          <a href="/" class={currentPath === "/" ? "active" : ""}>Issues</a>
+          <a href="/state" class={currentPath === "/state" ? "active" : ""}>State of the City</a>
+          <a href="/data" class={currentPath === "/data" ? "active" : ""}>The Data</a>
+          <a href="/candidates" class={currentPath === "/candidates" ? "active" : ""}>Candidates</a>
+          <a href="/methodology" class={currentPath === "/methodology" ? "active" : ""}>Methodology</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="inner">
+        <span>Independent. Not affiliated with any campaign. Maintained by <a href="/methodology" style="color:inherit;text-decoration:underline;">Liam Freaney</a>.</span>
+        <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
+          <span>Primary: Sept 9 · General: Nov 3, 2026</span>
+          <a href="https://ko-fi.com/lfreaney" target="_blank" rel="noopener" style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--pvd-red);border:1px solid var(--pvd-red);padding:4px 10px;border-radius:3px;white-space:nowrap;">Support this site</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+</style>

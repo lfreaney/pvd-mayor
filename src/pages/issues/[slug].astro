@@ -1,0 +1,314 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const issues = await getCollection('issues');
+  return issues.map(issue => ({ params: { slug: issue.slug } }));
+}
+
+const { slug } = Astro.params;
+const issue = await getEntry('issues', slug);
+if (!issue) return Astro.redirect('/');
+
+const { Content } = await issue.render();
+const d = issue.data;
+const hasFrames = d.frames && d.frames.length > 0;
+---
+<Layout title={d.title} description={d.summary} currentPath="/issues">
+  <div class="container" style="padding-top: 48px;">
+
+    <!-- Header -->
+    <div style="max-width: 760px;">
+      <p class="last-updated">Issue Analysis</p>
+      <h1 style="font-size: clamp(2rem, 5vw, 3rem); margin: 8px 0 16px;">{d.title}</h1>
+      <p style="font-size: 1.05rem; color: var(--ink-light); line-height: 1.6; max-width: 620px;">{d.summary}</p>
+      {d.updated && (
+        <p class="last-updated" style="margin-top: 12px;">
+          Last updated {new Date(d.updated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+        </p>
+      )}
+    </div>
+
+    <!-- Context -->
+    {d.context && (
+      <>
+        <div class="section-rule"><span>Context</span></div>
+        <div style="max-width: 720px;">
+          <p style="font-size: 0.92rem; line-height: 1.7; color: var(--ink-light);">{d.context}</p>
+        </div>
+      </>
+    )}
+
+    <!-- FRAME-BASED LAYOUT -->
+    {hasFrames && (
+      <>
+        <div class="section-rule"><span>Policy Levers</span></div>
+        <p style="font-size: 0.8rem; color: var(--ink-faint); max-width: 720px; margin-bottom: 32px; letter-spacing: 0.02em;">
+          Researchers and policymakers analyze housing affordability through established policy levers. Below, each lever is defined, evidence is summarized, and each candidate's stated position and actions are mapped to it. Silence on a lever is noted.
+        </p>
+
+        {d.frames!.map((frame) => (
+          <div class="frame-block" id={frame.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}>
+            <div class="frame-header">
+              <h2 class="frame-label">{frame.label}</h2>
+            </div>
+
+            <div class="frame-body">
+              <!-- What is this lever -->
+              <div class="frame-row frame-row-def">
+                <div class="frame-row-title">What it is</div>
+                <div class="frame-row-content">{frame.description}</div>
+              </div>
+
+              <!-- Evidence -->
+              <div class="frame-row frame-row-evidence">
+                <div class="frame-row-title">What the evidence says</div>
+                <div class="frame-row-content">{frame.evidence}</div>
+              </div>
+
+              <!-- Candidate positions -->
+              <div class="frame-candidates">
+                <div class="frame-candidate col-smiley">
+                  <div class="frame-cand-header">
+                    <span class="candidate-tag smiley">Smiley</span>
+                  </div>
+                  <p class="frame-cand-position">
+                    {frame.smiley_position ?? <em style="color: var(--ink-faint);">No stated position.</em>}
+                  </p>
+                  {frame.smiley_actions && frame.smiley_actions.length > 0 && (
+                    <div class="frame-cand-actions">
+                      <div class="frame-actions-label">Actions taken</div>
+                      <ul>
+                        {frame.smiley_actions.map((a: string) => <li>{a}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {(!frame.smiley_actions || frame.smiley_actions.length === 0) && (
+                    <div class="frame-cand-actions">
+                      <div class="frame-actions-label">Actions taken</div>
+                      <p style="color: var(--ink-faint); font-style: italic; font-size: 0.85rem;">None identified.</p>
+                    </div>
+                  )}
+                </div>
+
+                <div class="frame-candidate col-morales">
+                  <div class="frame-cand-header">
+                    <span class="candidate-tag morales">Morales</span>
+                  </div>
+                  <p class="frame-cand-position">
+                    {frame.morales_position ?? <em style="color: var(--ink-faint);">No stated position.</em>}
+                  </p>
+                  {frame.morales_actions && frame.morales_actions.length > 0 && (
+                    <div class="frame-cand-actions">
+                      <div class="frame-actions-label">Actions taken</div>
+                      <ul>
+                        {frame.morales_actions.map((a: string) => <li>{a}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {(!frame.morales_actions || frame.morales_actions.length === 0) && (
+                    <div class="frame-cand-actions">
+                      <div class="frame-actions-label">Actions taken</div>
+                      <p style="color: var(--ink-faint); font-style: italic; font-size: 0.85rem;">None identified.</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <!-- Gap / unanswered question -->
+              {frame.evidence_gap && (
+                <div class="frame-gap">
+                  <span class="frame-gap-label">⚠ Gap</span>
+                  {frame.evidence_gap}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </>
+    )}
+
+    <!-- LEGACY FLAT LAYOUT (for non-frame issues) -->
+    {!hasFrames && (d.smiley || d.morales) && (
+      <>
+        <div class="section-rule"><span>Candidate Positions</span></div>
+        <div class="compare-grid">
+          <div class="compare-col col-smiley">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+              <span class="candidate-tag smiley">Smiley</span>
+            </div>
+            <div class="compare-col-header">Brett Smiley</div>
+            <div class="compare-col-role">Incumbent Mayor, Democrat</div>
+            {d.smiley?.position && <div class="compare-section"><div class="compare-section-label">Position</div><p>{d.smiley.position}</p></div>}
+            {d.smiley?.actions?.length > 0 && <div class="compare-section"><div class="compare-section-label">Actions Taken</div><ul>{d.smiley.actions.map((a: string) => <li>{a}</li>)}</ul></div>}
+            {d.smiley?.args_for?.length > 0 && <div class="compare-section"><div class="compare-section-label">Arguments For</div><ul>{d.smiley.args_for.map((a: string) => <li>{a}</li>)}</ul></div>}
+            {d.smiley?.args_against?.length > 0 && <div class="compare-section"><div class="compare-section-label">Arguments Against</div><ul>{d.smiley.args_against.map((a: string) => <li>{a}</li>)}</ul></div>}
+          </div>
+          <div class="compare-col col-morales">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+              <span class="candidate-tag morales">Morales</span>
+            </div>
+            <div class="compare-col-header">David Morales</div>
+            <div class="compare-col-role">State Representative, Democrat</div>
+            {d.morales?.position && <div class="compare-section"><div class="compare-section-label">Position</div><p>{d.morales.position}</p></div>}
+            {d.morales?.actions?.length > 0 && <div class="compare-section"><div class="compare-section-label">Actions Taken</div><ul>{d.morales.actions.map((a: string) => <li>{a}</li>)}</ul></div>}
+            {d.morales?.args_for?.length > 0 && <div class="compare-section"><div class="compare-section-label">Arguments For</div><ul>{d.morales.args_for.map((a: string) => <li>{a}</li>)}</ul></div>}
+            {d.morales?.args_against?.length > 0 && <div class="compare-section"><div class="compare-section-label">Arguments Against</div><ul>{d.morales.args_against.map((a: string) => <li>{a}</li>)}</ul></div>}
+          </div>
+        </div>
+      </>
+    )}
+
+    <!-- Analysis -->
+    <div class="section-rule"><span>Analysis</span></div>
+    <div class="prose" style="margin: 0; max-width: 720px;">
+      <Content />
+    </div>
+
+    <!-- Sources -->
+    {d.sources?.length > 0 && (
+      <div class="sources" style="max-width: 720px;">
+        <h3>Sources</h3>
+        <ol>
+          {d.sources.map((s: { label: string; url?: string }) => (
+            <li>{s.url ? <a href={s.url} target="_blank" rel="noopener">{s.label}</a> : s.label}</li>
+          ))}
+        </ol>
+      </div>
+    )}
+
+    <div style="margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--rule);">
+      <a href="/" style="font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-faint);">← All Issues</a>
+    </div>
+  </div>
+</Layout>
+
+<style>
+.frame-block {
+  border: 1px solid var(--rule);
+  background: var(--bg-white);
+  margin-bottom: 24px;
+}
+
+.frame-header {
+  padding: 20px 28px 16px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--pvd-navy);
+}
+
+.frame-label {
+  font-size: 1.1rem;
+  color: white;
+  margin: 0;
+}
+
+.frame-body {
+  padding: 0;
+}
+
+.frame-row {
+  padding: 20px 28px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.frame-row-title {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.frame-row-content {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--ink-light);
+}
+
+.frame-row-evidence {
+  background: #F5F5F0;
+}
+
+.frame-candidates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.frame-candidate {
+  padding: 20px 28px;
+}
+
+.frame-candidate:first-child {
+  border-right: 1px solid var(--rule);
+}
+
+.frame-cand-header {
+  margin-bottom: 10px;
+}
+
+.frame-cand-position {
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--ink);
+  margin-bottom: 16px;
+}
+
+.frame-cand-actions {
+  margin-top: 12px;
+}
+
+.frame-actions-label {
+  font-size: 0.63rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 6px;
+}
+
+.frame-cand-actions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.frame-cand-actions li {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink-light);
+  padding-left: 14px;
+  position: relative;
+  margin-bottom: 5px;
+}
+
+.frame-cand-actions li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ink-faint);
+}
+
+.frame-gap {
+  padding: 14px 28px;
+  background: #FFF8E7;
+  border-left: 3px solid var(--pvd-gold);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.frame-gap-label {
+  font-weight: 700;
+  margin-right: 8px;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 680px) {
+  .frame-candidates { grid-template-columns: 1fr; }
+  .frame-candidate:first-child { border-right: none; border-bottom: 1px solid var(--rule); }
+  .frame-row, .frame-candidate { padding: 16px 18px; }
+  .frame-header { padding: 16px 18px; }
+}
+</style>

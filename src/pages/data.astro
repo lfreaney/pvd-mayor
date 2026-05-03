@@ -1,0 +1,534 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="The Data" currentPath="/data">
+  <div class="hero-stripe">
+    <div class="container">
+      <h1>The Data</h1>
+      <p class="subtitle">Ten charts that show what's actually happening in Providence — before the campaign spin.</p>
+      <p class="meta">Sources linked beneath each chart · Figures sourced from public data</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:80px;">
+
+    <!-- TURNOUT MAP -->
+    <div class="section-rule"><span>Voter Participation</span></div>
+    <div class="chart-block">
+      <h2 class="chart-title">Where Providence votes — and where it doesn't</h2>
+      <p class="chart-desc">Democratic primary turnout by precinct, 2022. The variation is stark — some precincts see 70%+ of registered Democrats vote; others barely 5%. This map shows the geography of civic participation and where either campaign needs to focus mobilization.</p>
+      <a href="/turnout-map.html" target="_blank" style="display:inline-block;margin-top:4px;margin-bottom:16px;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--pvd-red);border-bottom:1px solid var(--pvd-red);padding-bottom:1px;">Open interactive map →</a>
+      <div style="border:1px solid var(--rule);overflow:hidden;background:#F9F7F4;">
+        <iframe src="/turnout-map.html" width="100%" height="500" style="border:none;display:block;" loading="lazy" title="Providence voter turnout map by precinct"></iframe>
+      </div>
+      <p class="chart-note">Source: RI Board of Elections (September 13, 2022 Democratic Primary) · RIGIS Voting Precincts (2022) · Dem turnout = % of registered Democrats who voted · City average: 28.3% Dem turnout</p>
+    </div>
+    <div class="section-rule"><span>Housing</span></div>
+    <div class="chart-block">
+      <h2 class="chart-title">What a typical Providence household can afford vs. what rent actually costs</h2>
+      <p class="chart-desc">The 30% rule: housing economists say rent should be no more than 30% of household income. In Providence, that threshold and the actual median rent have been diverging sharply.</p>
+      <div style="position:relative;width:100%;height:320px;">
+        <canvas id="rentGapChart" role="img" aria-label="Line chart showing affordable rent threshold versus median asking rent in Providence 2019 to 2024. The gap has grown from roughly $200 to nearly $500 per month.">Affordable threshold was around $1,400 in 2019, median rent was around $1,600. By 2024, threshold was around $1,670 and median rent had risen to $2,145 — a gap of nearly $500/month.</canvas>
+      </div>
+      <p class="chart-note">Affordable threshold = 30% of median household income ÷ 12. Median rent from Rent.com / RIHousing annual surveys. Income from U.S. Census ACS 5-year estimates.</p>
+    </div>
+
+    <!-- CHART 2: Rent burden by neighborhood -->
+    <div class="chart-block" style="margin-top:48px;">
+      <h2 class="chart-title">Which neighborhoods are most rent-burdened</h2>
+      <p class="chart-desc">Rent-burdened means spending more than 30% of income on housing. In South Providence and Olneyville, nearly two-thirds of renter households are in this situation.</p>
+      <div style="position:relative;width:100%;" id="burdenContainer">
+        <canvas id="burdenChart" role="img" aria-label="Horizontal bar chart showing rent-burdened households by Providence neighborhood. South Providence leads at 67%, East Side lowest at 29%.">South Providence 67%, Olneyville 64%, West End 62%, Upper South Providence 61%, Elmwood 58%, Broad Street 57%, Smith Hill 54%, Charles 52%, Wanskuck 51%, Mount Hope 49%, Silver Lake 48%, Federal Hill 44%, Reservoir 42%, Wayland/College Hill 38%, Fox Point 36%, Downtown 34%, East Side 29%.</canvas>
+      </div>
+      <p class="chart-note">ACS 2022 5-year estimates, neighborhood-level approximations. Red = above 55%, orange = 40–55%, pink = below 40%.</p>
+    </div>
+
+    <!-- CHART 3: Housing units permitted -->
+    <div class="chart-block" style="margin-top:48px;">
+      <h2 class="chart-title">Providence builds less housing per capita than comparable cities</h2>
+      <p class="chart-desc">Rhode Island has one of the lowest per-capita home construction rates in the country. This chart shows new housing units permitted per 1,000 residents across comparable cities.</p>
+      <div style="position:relative;width:100%;height:340px;">
+        <canvas id="permitsChart" role="img" aria-label="Bar chart comparing housing permits per 1000 residents in Providence versus peer cities. Providence is near the bottom.">Providence 1.8, Hartford 2.1, New Haven 2.4, Worcester 3.1, Lowell 3.4, Portland ME 4.2, Burlington VT 5.1, national average 4.6.</canvas>
+      </div>
+      <p class="chart-note">U.S. Census Bureau Building Permits Survey, 2022–2023 average. Peer cities selected by population size and regional similarity.</p>
+    </div>
+
+    <!-- CHART 4: Violent crime trend -->
+    <div class="section-rule" style="margin-top:48px;"><span>Public Safety</span></div>
+    <div class="chart-block">
+      <h2 class="chart-title">Violent crime in Providence, 2019–2024</h2>
+      <p class="chart-desc">Violent crime has fallen significantly since its 2022 peak. The 2024 figure is the lowest since 1990. The trend is real — but the city still sits above the national average.</p>
+      <div style="position:relative;width:100%;height:300px;">
+        <canvas id="crimeChart" role="img" aria-label="Line chart of violent crime incidents in Providence from 2019 to 2024. Crime peaked in 2022 at around 750 incidents and fell to around 643 in 2024.">2019: 680, 2020: 720, 2021: 735, 2022: 758, 2023: 714, 2024: 643.</canvas>
+      </div>
+      <p class="chart-note">Providence Police Department annual crime data. Figures represent total violent crime incidents (assault, robbery, rape, homicide).</p>
+    </div>
+
+    <!-- CHART 5: School receivership timeline -->
+    <div class="section-rule" style="margin-top:48px;"><span>Public Schools</span></div>
+    <div class="chart-block">
+      <h2 class="chart-title">Seven years of state control — and no exit in sight</h2>
+      <p class="chart-desc">Providence schools have been under state receivership since 2019. Here's what has happened — and what hasn't.</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">2019</div>
+          <div class="tl-content">
+            <div class="tl-label bad">State takeover</div>
+            <p>Johns Hopkins report describes Providence schools as among the worst in the country. State takes operational control from the city.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2020–22</div>
+          <div class="tl-content">
+            <div class="tl-label neutral">COVID disruption</div>
+            <p>Pandemic disrupts reform implementation. Remote learning compounds existing gaps. Progress is slow.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2023</div>
+          <div class="tl-content">
+            <div class="tl-label neutral">Smiley takes office</div>
+            <p>New mayor inherits receivership. Cooperative approach with RIDE. No timeline for local control announced.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2024</div>
+          <div class="tl-content">
+            <div class="tl-label bad">Lawsuit settlement</div>
+            <p>City and state settle dispute over school funding during receivership. Providence must pay $146.5M/year — $11M more than before.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2025</div>
+          <div class="tl-content">
+            <div class="tl-label neutral">Receivership continues</div>
+            <p>RIDE retains control. Some academic improvement reported, but no concrete exit criteria published.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2026</div>
+          <div class="tl-content">
+            <div class="tl-label bad">No exit timeline</div>
+            <p>Seven years in. Neither mayoral candidate has secured a commitment from the state on when — or under what conditions — local control returns.</p>
+          </div>
+        </div>
+        <div class="tl-item tl-future">
+          <div class="tl-year">?</div>
+          <div class="tl-content">
+            <div class="tl-label future">Return to local control</div>
+            <p>No date. No criteria. No plan published by either campaign or the state.</p>
+          </div>
+        </div>
+      </div>
+      <p class="chart-note">Sources: RIDE, Johns Hopkins Institute for Education Policy (2019), Providence City Council budget documentation (2024).</p>
+    </div>
+
+    <!-- CHART 5: Gun seizures vs violent crime -->
+    <div class="chart-block" style="margin-top:48px;">
+      <h2 class="chart-title">More guns seized, less violent crime</h2>
+      <p class="chart-desc">PPD has significantly increased firearms seizures while violent crime has fallen. The relationship isn't simple — but targeted enforcement is part of the story.</p>
+      <div style="display:flex;gap:20px;margin-bottom:12px;font-size:12px;color:#888;">
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:20px;height:2.5px;background:#C8102E;display:inline-block;"></span>Firearms seized (left axis)</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:20px;height:2px;background:#0D1B2A;border-top:2px dashed #0D1B2A;display:inline-block;"></span>Violent crime (right axis)</span>
+      </div>
+      <div style="position:relative;width:100%;height:300px;">
+        <canvas id="gunChart" role="img" aria-label="Dual axis line chart showing firearms seized rising from 198 in 2019 to 325 in 2024, while violent crime fell from 680 to 643 over the same period.">Firearms seized: 198 (2019) to 325 (2024). Violent crime: 680 (2019) to 643 (2024).</canvas>
+      </div>
+      <p class="chart-note">PPD annual crime reports and press statements. 2024 firearms seizure figure from Chief Perez statement (March 2025).</p>
+    </div>
+
+    <!-- CHART 6: Tax-exempt property -->
+    <div class="section-rule" style="margin-top:48px;"><span>City Budget</span></div>
+    <div class="chart-block">
+      <h2 class="chart-title">Providence's tax-exempt property problem vs. peer cities</h2>
+      <p class="chart-desc">About 35% of Providence's assessed property value pays no taxes — universities, hospitals, nonprofits. This permanently shrinks the city's revenue base and pushes the burden onto everyone else. It's high, but not unique — Cambridge MA is even higher due to MIT and Harvard.</p>
+      <div style="position:relative;width:100%;height:320px;">
+        <canvas id="taxExemptChart" role="img" aria-label="Bar chart showing tax-exempt property as a percentage of assessed value across peer cities. Providence at 35%, Cambridge MA highest at 52%, Portland ME lowest at 18%.">Providence 35%, New Haven 31%, Hartford 28%, Worcester 22%, Cambridge MA 52%, Portland ME 18%, Burlington VT 24%.</canvas>
+      </div>
+      <p class="chart-note">Lincoln Institute of Land Policy, municipal assessor data, 2022–2023. Figures are estimates; methodologies vary by city.</p>
+    </div>
+
+    <!-- CHART 7: Property tax rate -->
+    <div class="chart-block" style="margin-top:24px;">
+      <h2 class="chart-title">Providence's residential property tax rate vs. peer cities</h2>
+      <p class="chart-desc">Despite the tax-exempt constraint, Providence's residential tax rate is moderate compared to some peers. Hartford's rate is nearly three times higher. The burden shows up more in service quality than raw rate.</p>
+      <div style="position:relative;width:100%;height:320px;">
+        <canvas id="taxBurdenChart" role="img" aria-label="Bar chart of residential property tax rates per $1,000 assessed value. Hartford highest at $74.29, Lowell lowest at $15.28, Providence at $24.56.">Providence $24.56, Hartford $74.29, New Haven $43.88, Worcester $17.31, Portland ME $23.00, Burlington VT $18.92, Lowell $15.28.</canvas>
+      </div>
+      <p class="chart-note">Lincoln Institute of Land Policy 50-State Property Tax Comparison Study, 2023. Rates per $1,000 of assessed value.</p>
+    </div>
+
+    <!-- CHART 8: RIPTA ridership -->
+    <div class="section-rule" style="margin-top:48px;"><span>Transportation</span></div>
+    <div class="chart-block">
+      <h2 class="chart-title">RIPTA ridership still hasn't recovered from the pandemic</h2>
+      <p class="chart-desc">Annual ridership fell by nearly half in 2020 and has only partially recovered. In a city where 23% of households have no car, this is a direct equity issue.</p>
+      <div style="display:flex;gap:20px;margin-bottom:12px;font-size:12px;color:#888;">
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:20px;height:2.5px;background:#0D1B2A;display:inline-block;"></span>Annual ridership (millions)</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:20px;height:2px;background:#C8102E;border-top:2px dashed #C8102E;display:inline-block;"></span>Pre-pandemic baseline</span>
+      </div>
+      <div style="position:relative;width:100%;height:300px;">
+        <canvas id="riptaChart" role="img" aria-label="Line chart of RIPTA annual ridership in millions, 2019 to 2024. Fell from 17.2M in 2019 to 9.1M in 2020, recovering to 14.9M in 2024, still below pre-pandemic levels.">2019: 17.2M, 2020: 9.1M, 2021: 10.4M, 2022: 12.8M, 2023: 14.1M, 2024: 14.9M.</canvas>
+      </div>
+      <p class="chart-note">RIPTA annual ridership reports. 2024 figure estimated from partial-year data and trend. Pre-pandemic baseline = 2019 actual.</p>
+    </div>
+
+    <!-- CHART 9: Campaign finance -->
+    <div class="section-rule" style="margin-top:48px;"><span>Campaign Finance</span></div>
+    <div class="chart-block">
+      <h2 class="chart-title">The money gap: Smiley vs. Morales</h2>
+      <p class="chart-desc">Smiley entered 2026 with nearly 15 times more cash than Morales. Morales closed some of the gap in Q1 2026 — but the disparity is still enormous. No incumbent mayor has lost a Providence primary since 1974.</p>
+      <div style="display:flex;gap:20px;margin-bottom:12px;font-size:12px;color:#888;">
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;background:#1A4B8C;border-radius:2px;display:inline-block;"></span>Smiley</span>
+        <span style="display:flex;align-items:center;gap:5px;"><span style="width:12px;height:12px;background:#C8102E;border-radius:2px;display:inline-block;"></span>Morales</span>
+      </div>
+      <div style="position:relative;width:100%;height:280px;">
+        <canvas id="financeChart" role="img" aria-label="Grouped bar chart comparing campaign cash. End of 2025: Smiley $1.3M, Morales $89K. Q1 2026 raised: Smiley $250K, Morales $100K.">End of 2025 cash on hand: Smiley $1,300K, Morales $89K. Q1 2026 raised: Smiley $250K, Morales $100K.</canvas>
+      </div>
+      <p class="chart-note">RI Board of Elections campaign finance reports. End of 2025 figures from December 2025 filing. Q1 2026 figures from campaign statements (Boston Globe, April 2026); official Q1 reports due end of April 2026.</p>
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+.chart-block { background: var(--bg-white); border: 1px solid var(--rule); padding: 28px 32px; }
+.chart-title { font-size: 1.2rem; margin: 0 0 8px; }
+.chart-desc { font-size: 0.88rem; color: var(--ink-light); line-height: 1.6; margin: 0 0 20px; max-width: 680px; }
+.chart-note { font-size: 0.72rem; color: var(--ink-faint); margin-top: 12px; line-height: 1.5; }
+
+.timeline { display: flex; flex-direction: column; gap: 0; margin: 24px 0 0; }
+.tl-item { display: grid; grid-template-columns: 80px 1fr; gap: 0; border-left: 2px solid var(--rule); margin-left: 40px; padding: 0 0 28px 24px; position: relative; }
+.tl-item::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--pvd-navy); position: absolute; left: -6px; top: 4px; }
+.tl-future::before { background: var(--pvd-red); }
+.tl-year { font-family: 'DM Serif Display', Georgia, serif; font-size: 1rem; color: var(--ink-faint); padding-right: 16px; line-height: 1.3; }
+.tl-content p { font-size: 0.84rem; color: var(--ink-light); line-height: 1.6; margin: 6px 0 0; }
+.tl-label { display: inline-block; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 3px; }
+.tl-label.bad { background: #FCEBEB; color: #791F1F; }
+.tl-label.neutral { background: #F1EFE8; color: #5F5E5A; }
+.tl-label.future { background: #FFF8E7; color: #633806; }
+
+@media (max-width: 600px) {
+  .chart-block { padding: 18px 16px; }
+  .tl-item { grid-template-columns: 56px 1fr; margin-left: 16px; }
+}
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// CHART 1: Rent gap
+new Chart(document.getElementById('rentGapChart'), {
+  type: 'line',
+  data: {
+    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+    datasets: [
+      {
+        label: 'Median asking rent',
+        data: [1580, 1620, 1750, 1890, 1905, 2145],
+        borderColor: '#C8102E',
+        backgroundColor: 'rgba(200,16,46,0.06)',
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: '#C8102E',
+      },
+      {
+        label: 'Affordable threshold (30% of median income)',
+        data: [1530, 1545, 1570, 1610, 1645, 1669],
+        borderColor: '#0D1B2A',
+        backgroundColor: 'rgba(13,27,42,0.04)',
+        borderWidth: 2,
+        borderDash: [6, 3],
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: '#0D1B2A',
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` $${ctx.parsed.y.toLocaleString()}/mo` } }
+    },
+    scales: {
+      y: {
+        min: 1400,
+        ticks: { callback: v => '$' + v.toLocaleString(), font: { size: 12 } },
+        grid: { color: 'rgba(128,128,128,0.1)' },
+        border: { display: false }
+      },
+      x: {
+        grid: { display: false },
+        ticks: { font: { size: 12 } },
+        border: { display: false }
+      }
+    }
+  }
+});
+
+// Custom legend for chart 1
+const lg = document.createElement('div');
+lg.style.cssText = 'display:flex;gap:20px;font-size:12px;color:#888;margin-top:8px;';
+lg.innerHTML = '<span style="display:flex;align-items:center;gap:5px;"><span style="width:24px;height:3px;background:#C8102E;display:inline-block;"></span>Median asking rent</span><span style="display:flex;align-items:center;gap:5px;"><span style="width:24px;height:2px;background:#0D1B2A;display:inline-block;border-top:2px dashed #0D1B2A;"></span>Affordable at 30% of income</span>';
+document.getElementById('rentGapChart').parentNode.after(lg);
+
+// CHART 2: Rent burden
+const neighborhoods = ['South Providence','Olneyville','West End','Upper South Prov.','Elmwood','Broad Street','Smith Hill','Charles','Wanskuck','Mount Hope','Silver Lake','Federal Hill','Reservoir','Wayland/College Hill','Fox Point','Downtown','East Side'];
+const burdenVals = [67,64,62,61,58,57,54,52,51,49,48,44,42,38,36,34,29];
+const burdenColors = burdenVals.map(v => v >= 55 ? '#C8102E' : v >= 40 ? '#E8A020' : '#F09595');
+const container = document.getElementById('burdenContainer');
+const canvas = document.getElementById('burdenChart');
+canvas.style.height = (neighborhoods.length * 30 + 60) + 'px';
+container.style.height = canvas.style.height;
+new Chart(canvas, {
+  type: 'bar',
+  data: {
+    labels: neighborhoods,
+    datasets: [{ data: burdenVals, backgroundColor: burdenColors, borderWidth: 0, borderRadius: 2 }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.x}% rent-burdened` } }
+    },
+    scales: {
+      x: { min: 0, max: 80, ticks: { callback: v => v + '%', font: { size: 11 } }, grid: { color: 'rgba(128,128,128,0.1)' }, border: { display: false } },
+      y: { grid: { display: false }, ticks: { font: { size: 11 } }, border: { display: false } }
+    }
+  }
+});
+
+// CHART 3: Housing permits
+const cities = ['Providence', 'Hartford', 'New Haven', 'Worcester', 'Lowell', 'Portland ME', 'Burlington VT', 'National avg'];
+const permits = [1.8, 2.1, 2.4, 3.1, 3.4, 4.2, 5.1, 4.6];
+const permColors = cities.map((c, i) => c === 'Providence' ? '#C8102E' : c === 'National avg' ? '#0D1B2A' : '#B4B2A9');
+new Chart(document.getElementById('permitsChart'), {
+  type: 'bar',
+  data: {
+    labels: cities,
+    datasets: [{ data: permits, backgroundColor: permColors, borderWidth: 0, borderRadius: 3 }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} units per 1,000 residents` } }
+    },
+    scales: {
+      y: { min: 0, ticks: { font: { size: 12 } }, grid: { color: 'rgba(128,128,128,0.1)' }, border: { display: false } },
+      x: { grid: { display: false }, ticks: { font: { size: 11 }, autoSkip: false }, border: { display: false } }
+    }
+  }
+});
+
+// CHART 4: Violent crime
+new Chart(document.getElementById('crimeChart'), {
+  type: 'line',
+  data: {
+    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+    datasets: [{
+      label: 'Violent crime incidents',
+      data: [680, 720, 735, 758, 714, 643],
+      borderColor: '#0D1B2A',
+      backgroundColor: 'rgba(13,27,42,0.06)',
+      borderWidth: 2.5,
+      fill: true,
+      tension: 0.3,
+      pointRadius: 5,
+      pointBackgroundColor: '#0D1B2A',
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y} incidents` } }
+    },
+    scales: {
+      y: { min: 500, ticks: { font: { size: 12 } }, grid: { color: 'rgba(128,128,128,0.1)' }, border: { display: false } },
+      x: { grid: { display: false }, ticks: { font: { size: 12 } }, border: { display: false } }
+    }
+  }
+});
+
+// CHART 5: Gun seizures vs violent crime
+new Chart(document.getElementById('gunChart'), {
+  type: 'line',
+  data: {
+    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+    datasets: [
+      {
+        label: 'Firearms seized',
+        data: [198, 215, 240, 268, 290, 325],
+        borderColor: '#C8102E',
+        backgroundColor: 'rgba(200,16,46,0)',
+        borderWidth: 2.5,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: '#C8102E',
+        yAxisID: 'y1',
+      },
+      {
+        label: 'Violent crime incidents',
+        data: [680, 720, 735, 758, 714, 643],
+        borderColor: '#0D1B2A',
+        backgroundColor: 'rgba(13,27,42,0)',
+        borderWidth: 2,
+        borderDash: [5, 3],
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: '#0D1B2A',
+        yAxisID: 'y2',
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y1: { position: 'left', min: 150, ticks: { font: { size: 11 }, callback: v => v + ' seized' }, grid: { color: 'rgba(128,128,128,0.1)' }, border: { display: false } },
+      y2: { position: 'right', min: 500, ticks: { font: { size: 11 }, callback: v => v + ' crimes' }, grid: { display: false }, border: { display: false } },
+      x: { grid: { display: false }, ticks: { font: { size: 12 } }, border: { display: false } }
+    }
+  }
+});
+
+// CHART 6: Tax-exempt property
+new Chart(document.getElementById('taxExemptChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Providence', 'New Haven', 'Hartford', 'Worcester', 'Cambridge MA', 'Portland ME', 'Burlington VT'],
+    datasets: [{
+      label: '% of assessed value tax-exempt',
+      data: [35, 31, 28, 22, 52, 18, 24],
+      backgroundColor: ['#C8102E', '#B4B2A9', '#B4B2A9', '#B4B2A9', '#B4B2A9', '#B4B2A9', '#B4B2A9'],
+      borderWidth: 0,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.parsed.y}% tax-exempt` } }
+    },
+    scales: {
+      y: { min: 0, max: 60, ticks: { callback: v => v + '%', font: { size: 12 } }, grid: { color: 'rgba(128,128,128,0.1)' }, border: { display: false } },
+      x: { grid: { display: false }, ticks: { font: { size: 11 }, autoSkip: false }, border: { display: false } }
+    }
+  }
+});
+
+// CHART 7: Property tax burden
+new Chart(document.getElementById('taxBurdenChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Providence', 'Hartford', 'New Haven', 'Worcester', 'Portland ME', 'Burlington VT', 'Lowell'],
+    datasets: [{
+      label: 'Residential property tax rate (per $1,000 assessed)',
+      data: [24.56, 74.29, 43.88, 17.31, 23.00, 18.92, 15.28],
+      backgroundColor: ['#C8102E', '#B4B2A9', '#B4B2A9', '#B4B2A9', '#B4B2A9', '#B4B2A9', '#B4B2A9'],
+      borderWidth: 0,
+      borderRadius: 3,
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` $${ctx.parsed.y.toFixed(2)} per $1,000` } }
+    },
+    scales: {
+      y: { min: 0, ticks: { callback: v => '$' + v, font: { size: 12 } }, grid: { color: 'rgba(128,128,128,0.1)' }, border: { display: false } },
+      x: { grid: { display: false }, ticks: { font: { size: 11 }, autoSkip: false }, border: { display: false } }
+    }
+  }
+});
+
+// CHART 8: RIPTA ridership
+new Chart(document.getElementById('riptaChart'), {
+  type: 'line',
+  data: {
+    labels: ['2019', '2020', '2021', '2022', '2023', '2024'],
+    datasets: [
+      {
+        label: 'Annual ridership',
+        data: [17.2, 9.1, 10.4, 12.8, 14.1, 14.9],
+        borderColor: '#0D1B2A',
+        backgroundColor: 'rgba(13,27,42,0.06)',
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.3,
+        pointRadius: 4,
+        pointBackgroundColor: '#0D1B2A',
+      },
+      {
+        label: 'Pre-pandemic baseline',
+        data: [17.2, 17.2, 17.2, 17.2, 17.2, 17.2],
+        borderColor: '#C8102E',
+        borderWidth: 1.5,
+        borderDash: [6, 3],
+        pointRadius: 0,
+        fill: false,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { min: 0, ticks: { callback: v => v + 'M', font: { size: 12 } }, grid: { color: 'rgba(128,128,128,0.1)' }, border: { display: false } },
+      x: { grid: { display: false }, ticks: { font: { size: 12 } }, border: { display: false } }
+    }
+  }
+});
+
+// CHART 9: Campaign finance
+new Chart(document.getElementById('financeChart'), {
+  type: 'bar',
+  data: {
+    labels: ['End of 2025', 'Q1 2026 raised'],
+    datasets: [
+      {
+        label: 'Smiley',
+        data: [1300, 250],
+        backgroundColor: '#1A4B8C',
+        borderWidth: 0,
+        borderRadius: 3,
+      },
+      {
+        label: 'Morales',
+        data: [89, 100],
+        backgroundColor: '#C8102E',
+        borderWidth: 0,
+        borderRadius: 3,
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y}K` } }
+    },
+    scales: {
+      y: { min: 0, ticks: { callback: v => '$' + v + 'K', font: { size: 12 } }, grid: { color: 'rgba(128,128,128,0.1)' }, border: { display: false } },
+      x: { grid: { display: false }, ticks: { font: { size: 12 } }, border: { display: false } }
+    }
+  }
+});
+</script>
