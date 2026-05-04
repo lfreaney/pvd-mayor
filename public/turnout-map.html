@@ -11,72 +11,70 @@
   .page-header { background: #0D1B2A; color: white; padding: 22px 28px; }
   .page-header h1 { font-size: 1.5rem; font-weight: 400; margin-bottom: 4px; }
   .page-header p { font-size: 0.8rem; opacity: 0.6; }
-  .map-container { display: flex; gap: 0; max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
-  #map { flex: 1 1 auto; min-width: 0; height: 600px; border: 1px solid #ddd; }
-  .leaflet-container { background: #F2EFE9; font-family: Georgia, serif; }
-  .hood-label-leaf { background: transparent; border: none; box-shadow: none; font-family: Georgia, serif; font-size: 12px; font-weight: 600; color: #fff; text-align: center; pointer-events: none; text-shadow: 0 0 4px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.7); white-space: nowrap; letter-spacing: 0.3px; }
-  .sidebar { width: 250px; flex-shrink: 0; padding-left: 24px; }
-  .legend { margin-bottom: 18px; }
+  .map-wrap { max-width: 1100px; margin: 0 auto; padding: 24px 20px; display: flex; gap: 0; }
+  #map { flex: 1 1 auto; min-width: 0; height: 600px; border: 1px solid #ddd; background: #eee; }
+  .leaflet-container { background: #e8e4dc; font-family: Georgia, serif; }
+  .hood-label-leaf { background: transparent; border: none; box-shadow: none; font-family: Georgia, serif; font-size: 11px; font-weight: 700; color: #fff; text-align: center; pointer-events: none; text-shadow: 0 0 4px rgba(0,0,0,0.95), 0 0 4px rgba(0,0,0,0.95), 0 0 8px rgba(0,0,0,0.8); white-space: nowrap; letter-spacing: 0.5px; }
+  .sidebar { width: 250px; flex-shrink: 0; padding-left: 22px; }
+  .toggle-row { display: flex; gap: 6px; margin-bottom: 16px; }
+  .toggle-btn { flex: 1; padding: 6px 6px; font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid #ddd; background: white; cursor: pointer; font-family: Georgia, serif; }
+  .toggle-btn.active { background: #0D1B2A; color: white; border-color: #0D1B2A; }
+  .legend { margin-bottom: 16px; }
   .legend-title { font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-bottom: 8px; }
   .legend-scale { display: flex; flex-direction: column; gap: 3px; }
   .legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.74rem; color: #444; }
   .legend-swatch { width: 16px; height: 12px; border-radius: 2px; flex-shrink: 0; }
   .tooltip-panel { border: 1px solid #ddd; background: white; padding: 14px; min-height: 180px; }
   .precinct-num { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: #888; margin-bottom: 2px; }
-  .neighborhood { font-size: 0.86rem; font-weight: 500; color: #0D1B2A; margin-bottom: 8px; line-height: 1.3; }
-  .dem-turnout { font-size: 1.7rem; font-family: Georgia, serif; color: #C8102E; line-height: 1; margin-bottom: 2px; }
-  .dem-label { font-size: 0.68rem; color: #666; margin-bottom: 8px; }
-  .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 3px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.78rem; }
+  .t-neighborhood { font-size: 0.88rem; font-weight: 500; color: #0D1B2A; margin-bottom: 8px; line-height: 1.3; }
+  .t-dem-turnout { font-size: 1.8rem; font-family: Georgia, serif; color: #C8102E; line-height: 1; margin-bottom: 2px; }
+  .t-dem-label { font-size: 0.68rem; color: #666; margin-bottom: 8px; }
+  .stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 4px 0; border-bottom: 1px solid #f0f0f0; }
   .stat-row:last-child { border-bottom: none; }
-  .stat-label { color: #888; font-size: 0.7rem; }
-  .stat-val { color: #333; font-weight: 500; }
+  .stat-label { font-size: 0.7rem; color: #888; }
+  .stat-val { font-size: 0.82rem; color: #333; font-weight: 500; }
   .polling-block { margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee; }
   .polling-title { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: #aaa; margin-bottom: 3px; }
   .polling-name { font-size: 0.76rem; color: #333; line-height: 1.4; }
   .polling-addr { font-size: 0.7rem; color: #888; }
   .polling-shared { font-size: 0.62rem; color: #bbb; font-style: italic; margin-top: 2px; }
-  .context { font-size: 0.7rem; color: #888; line-height: 1.5; border-top: 1px solid #eee; padding-top: 6px; margin-top: 6px; }
+  .t-context { font-size: 0.7rem; color: #888; line-height: 1.5; border-top: 1px solid #eee; padding-top: 6px; margin-top: 6px; }
   .placeholder { font-size: 0.78rem; color: #aaa; font-style: italic; }
-  .toggle-row { display: flex; gap: 6px; margin-bottom: 14px; }
-  .toggle-btn { flex: 1; padding: 5px 6px; font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid #ddd; background: white; cursor: pointer; font-family: Georgia, serif; }
-  .toggle-btn.active { background: #0D1B2A; color: white; border-color: #0D1B2A; }
-  .opacity-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 0.7rem; color: #888; }
-  .opacity-row input { flex: 1; min-width: 0; }
-  .note { font-size: 0.66rem; color: #aaa; line-height: 1.5; margin-top: 12px; }
-  @media (max-width: 700px) {
-    .map-container { flex-direction: column; padding: 14px; gap: 16px; }
-    #map { width: 100%; height: 420px; flex: 0 0 auto; }
+  .note { font-size: 0.66rem; color: #aaa; line-height: 1.55; margin-top: 14px; }
+  @media (max-width: 720px) {
+    .map-wrap { flex-direction: column; padding: 12px; gap: 14px; }
+    #map { width: 100%; height: 400px; flex: 0 0 400px; }
     .sidebar { width: 100%; padding-left: 0; }
+    .page-header { padding: 16px 18px; }
+    .page-header h1 { font-size: 1.2rem; }
   }
 </style>
 </head>
 <body>
 <div class="page-header">
   <h1>Where Providence votes — and where it doesn't</h1>
-  <p>Democratic Primary turnout by precinct · September 13, 2022 · Hover for details · Source: RI Board of Elections / RIGIS</p>
+  <p>Democratic Primary turnout by precinct · September 13, 2022 · Tap or hover a precinct for details · Source: RI Board of Elections / RIGIS</p>
 </div>
-<div class="map-container">
+<div class="map-wrap">
   <div id="map"></div>
   <div class="sidebar">
     <div class="toggle-row">
       <button class="toggle-btn active" onclick="setMode('dem')" id="btn-dem">Dem primary</button>
       <button class="toggle-btn" onclick="setMode('total')" id="btn-total">All voters</button>
     </div>
-    <div class="opacity-row">
-      <span>Streets</span>
-      <input type="range" min="20" max="90" value="65" id="opacity-slider">
-      <span>Colors</span>
-    </div>
     <div class="legend">
-      <div class="legend-title" id="legend-title">Turnout among registered Democrats</div>
+      <div class="legend-title" id="legend-title">Turnout — registered Democrats</div>
       <div class="legend-scale" id="legend-scale"></div>
     </div>
     <div class="tooltip-panel" id="tooltip-panel">
       <div class="placeholder">Tap or hover a precinct for details</div>
     </div>
     <div class="note">
-      Streets and landmarks underneath. Slide left to see streets clearly, right to emphasize colors.<br><br>
-      Total registered: <strong>123,945</strong> · City Dem avg: <strong>28.3%</strong>
+      <strong>Dem primary</strong> = % of registered Democrats who voted.<br>
+      <strong>All voters</strong> = % of all registered voters.<br><br>
+      Total registered in Providence: <strong>123,945</strong><br>
+      City Dem primary avg: <strong>28.3%</strong><br><br>
+      Polling places from City of Providence (2024). Neighborhood labels are approximate. 2022 primary had no contested Providence mayor race — 2026 will be significantly higher turnout.
     </div>
   </div>
 </div>
@@ -90,18 +88,18 @@ const colorScales = {
     breaks: [15, 25, 35, 45, 55, 65],
     colors: ['#FEE5E5','#FAADAD','#F07070','#E03535','#C8102E','#8B0000'],
     labels: ['Under 15%','15–25%','25–35%','35–45%','45–55%','55%+'],
-    field: 'dem_turnout', title: 'Turnout among registered Democrats'
+    field: 'dem_turnout', title: 'Turnout — registered Democrats'
   },
   total: {
     breaks: [8, 13, 18, 23, 30, 40],
     colors: ['#E8F4FD','#A8D4EF','#68B4E0','#2888C8','#0D5FA0','#082F60'],
     labels: ['Under 8%','8–13%','13–18%','18–23%','23–30%','30%+'],
-    field: 'total_turnout', title: 'Turnout among all registered voters'
+    field: 'total_turnout', title: 'Turnout — all registered voters'
   }
 };
 
 let mode = 'dem';
-let fillOpacity = 0.65;
+const OPACITY = 0.68;
 const cityDemAvg = 28.3;
 
 function getColor(val, m) {
@@ -112,7 +110,10 @@ function getColor(val, m) {
   return s.colors[0];
 }
 
-const map = L.map('map', { center: [41.823, -71.418], zoom: 12, scrollWheelZoom: true, zoomControl: true });
+const map = L.map('map', {
+  center: [41.823, -71.418], zoom: 12,
+  scrollWheelZoom: true, zoomControl: true
+});
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
   attribution: '© <a href="https://www.openstreetmap.org/copyright">OSM</a> © <a href="https://carto.com/attributions">CARTO</a>',
@@ -122,77 +123,83 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
 function styleFn(feature) {
   return {
     fillColor: getColor(feature.properties[colorScales[mode].field], mode),
-    weight: 0.5, color: 'rgba(0,0,0,0.3)', fillOpacity: fillOpacity
+    weight: 0.5,
+    color: 'rgba(0,0,0,0.25)',
+    fillOpacity: OPACITY
   };
+}
+
+function showInfo(p) {
+  const diff = (p.dem_turnout - cityDemAvg).toFixed(1);
+  const diffStr = diff > 0 ? `+${diff}` : `${diff}`;
+  const signal = p.dem_turnout >= 45 ? '🔴 High turnout' : p.dem_turnout <= 15 ? '⚪ Low turnout' : '🟡 Near avg';
+  const reg = p.registered ? p.registered.toLocaleString() : '?';
+  const pct = p.pct_of_citywide ? p.pct_of_citywide.toFixed(1) : '?';
+  const sharedNote = p.polling_shared ? '<div class="polling-shared">Shares location with adjacent precincts</div>' : '';
+  const polling = p.polling_name
+    ? `<div class="polling-block">
+        <div class="polling-title">Polling place</div>
+        <div class="polling-name">${p.polling_name}</div>
+        <div class="polling-addr">${p.polling_address}</div>
+        ${sharedNote}
+      </div>`
+    : '';
+  document.getElementById('tooltip-panel').innerHTML = `
+    <div class="precinct-num">Precinct ${p.precinct} · Ward ${p.Ward}</div>
+    <div class="t-neighborhood">${p.neighborhood}</div>
+    <div class="t-dem-turnout">${p.dem_turnout.toFixed(1)}%</div>
+    <div class="t-dem-label">of registered Democrats voted</div>
+    <div class="stat-row"><span class="stat-label">All-voter turnout</span><span class="stat-val">${p.total_turnout.toFixed(1)}%</span></div>
+    <div class="stat-row"><span class="stat-label">Registered voters</span><span class="stat-val">${reg}</span></div>
+    <div class="stat-row"><span class="stat-label">Share of city</span><span class="stat-val">${pct}%</span></div>
+    ${polling}
+    <div class="t-context">${diffStr}pp vs. city avg · ${signal}</div>
+  `;
 }
 
 const precinctLayer = L.geoJSON(geojson, {
   style: styleFn,
   onEachFeature: function(feature, layer) {
     const p = feature.properties;
-    function showInfo() {
-      const diff = (p.dem_turnout - cityDemAvg).toFixed(1);
-      const diffStr = diff > 0 ? `+${diff}` : diff;
-      const signal = p.dem_turnout >= 45 ? '🔴 High turnout' : p.dem_turnout <= 15 ? '⚪ Low turnout' : '🟡 Near avg';
-      const pctCity = p.pct_of_citywide ? p.pct_of_citywide.toFixed(1) : '?';
-      const reg = p.registered ? p.registered.toLocaleString() : '?';
-      const pollingShared = p.polling_shared ? '<div class="polling-shared">Shares with adjacent precincts</div>' : '';
-      const polling = p.polling_name 
-        ? `<div class="polling-block">
-            <div class="polling-title">Polling place</div>
-            <div class="polling-name">${p.polling_name}</div>
-            <div class="polling-addr">${p.polling_address}</div>
-            ${pollingShared}
-          </div>` 
-        : '';
-      document.getElementById('tooltip-panel').innerHTML = `
-        <div class="precinct-num">Precinct ${p.precinct} · Ward ${p.Ward}</div>
-        <div class="neighborhood">${p.neighborhood}</div>
-        <div class="dem-turnout">${p.dem_turnout.toFixed(1)}%</div>
-        <div class="dem-label">of registered Democrats voted</div>
-        <div class="stat-row"><span class="stat-label">All-voter turnout</span><span class="stat-val">${p.total_turnout.toFixed(1)}%</span></div>
-        <div class="stat-row"><span class="stat-label">Registered voters</span><span class="stat-val">${reg}</span></div>
-        <div class="stat-row"><span class="stat-label">Share of city</span><span class="stat-val">${pctCity}%</span></div>
-        ${polling}
-        <div class="context">${diffStr}pp vs. city avg · ${signal}</div>
-      `;
-    }
     layer.on('mouseover', function() {
-      this.setStyle({ weight: 2, color: '#000', fillOpacity: Math.min(fillOpacity + 0.2, 0.95) });
+      this.setStyle({ weight: 2.5, color: '#111', fillOpacity: 0.9 });
       this.bringToFront();
-      showInfo();
+      showInfo(p);
     });
     layer.on('mouseout', function() {
       precinctLayer.resetStyle(this);
     });
-    layer.on('click', showInfo); // for mobile tap
+    layer.on('click', function() { showInfo(p); });
   }
 }).addTo(map);
 
-map.fitBounds(precinctLayer.getBounds(), { padding: [10, 10] });
+map.fitBounds(precinctLayer.getBounds(), { padding: [8, 8] });
 
-// Force Leaflet to recompute size after layout settles (fixes mobile rendering)
-setTimeout(() => map.invalidateSize(), 200);
-window.addEventListener('resize', () => map.invalidateSize());
-window.addEventListener('load', () => map.invalidateSize());
+// Invalidate size after layout settles — critical for mobile
+setTimeout(() => map.invalidateSize(), 100);
+setTimeout(() => map.invalidateSize(), 500);
 
 // Neighborhood labels
-const neighborhoods = {};
+const hoods = {};
 geojson.features.forEach(f => {
   const hood = f.properties.neighborhood;
-  if (!neighborhoods[hood]) neighborhoods[hood] = { coords: [] };
-  const coords = f.geometry.coordinates[0];
+  if (!hoods[hood]) hoods[hood] = [];
+  const coords = f.geometry.type === 'Polygon' ? f.geometry.coordinates[0] : f.geometry.coordinates[0][0];
   let lat = 0, lon = 0;
   coords.forEach(c => { lon += c[0]; lat += c[1]; });
-  lat /= coords.length; lon /= coords.length;
-  neighborhoods[hood].coords.push([lat, lon]);
+  hoods[hood].push([lat / coords.length, lon / coords.length]);
 });
 
-Object.entries(neighborhoods).forEach(([hood, data]) => {
-  const lat = data.coords.reduce((s, c) => s + c[0], 0) / data.coords.length;
-  const lon = data.coords.reduce((s, c) => s + c[1], 0) / data.coords.length;
+Object.entries(hoods).forEach(([hood, pts]) => {
+  const lat = pts.reduce((s, p) => s + p[0], 0) / pts.length;
+  const lon = pts.reduce((s, p) => s + p[1], 0) / pts.length;
   L.marker([lat, lon], {
-    icon: L.divIcon({ className: 'hood-label-leaf', html: hood.toUpperCase(), iconSize: [120, 16], iconAnchor: [60, 8] }),
+    icon: L.divIcon({
+      className: 'hood-label-leaf',
+      html: hood.toUpperCase(),
+      iconSize: [130, 18],
+      iconAnchor: [65, 9]
+    }),
     interactive: false, keyboard: false
   }).addTo(map);
 });
@@ -202,25 +209,14 @@ function setMode(m) {
   document.getElementById('btn-dem').classList.toggle('active', m === 'dem');
   document.getElementById('btn-total').classList.toggle('active', m === 'total');
   document.getElementById('legend-title').textContent = colorScales[m].title;
-  precinctLayer.eachLayer(layer => {
-    const f = layer.feature;
-    layer.setStyle({
-      fillColor: getColor(f.properties[colorScales[m].field], m),
-      fillOpacity: fillOpacity, weight: 0.5, color: 'rgba(0,0,0,0.3)'
-    });
-  });
+  precinctLayer.setStyle(styleFn);
   buildLegend();
 }
 
-document.getElementById('opacity-slider').addEventListener('input', function(e) {
-  fillOpacity = parseInt(e.target.value, 10) / 100;
-  precinctLayer.eachLayer(layer => layer.setStyle({ fillOpacity: fillOpacity }));
-});
-
 function buildLegend() {
   const s = colorScales[mode];
-  document.getElementById('legend-scale').innerHTML = s.labels.map((label, i) =>
-    `<div class="legend-item"><div class="legend-swatch" style="background:${s.colors[i]}"></div><span>${label}</span></div>`
+  document.getElementById('legend-scale').innerHTML = s.labels.map((l, i) =>
+    `<div class="legend-item"><div class="legend-swatch" style="background:${s.colors[i]}"></div><span>${l}</span></div>`
   ).join('');
 }
 
