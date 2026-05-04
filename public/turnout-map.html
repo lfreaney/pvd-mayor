@@ -12,9 +12,8 @@
   .page-header h1 { font-size: 1.5rem; font-weight: 400; margin-bottom: 4px; }
   .page-header p { font-size: 0.8rem; opacity: 0.6; }
   .map-container { display: flex; gap: 0; max-width: 1100px; margin: 0 auto; padding: 24px 20px; }
-  #map { flex: 1; height: 600px; border: 1px solid #ddd; }
+  #map { flex: 1 1 auto; min-width: 0; height: 600px; border: 1px solid #ddd; }
   .leaflet-container { background: #F2EFE9; font-family: Georgia, serif; }
-  .precinct-label { background: transparent; border: none; box-shadow: none; font-family: Georgia, serif; font-size: 9px; font-weight: 400; color: #fff; text-align: center; pointer-events: none; text-shadow: 0 0 3px rgba(0,0,0,0.85), 0 0 3px rgba(0,0,0,0.85); white-space: nowrap; }
   .hood-label-leaf { background: transparent; border: none; box-shadow: none; font-family: Georgia, serif; font-size: 12px; font-weight: 600; color: #fff; text-align: center; pointer-events: none; text-shadow: 0 0 4px rgba(0,0,0,0.9), 0 0 4px rgba(0,0,0,0.9), 0 0 6px rgba(0,0,0,0.7); white-space: nowrap; letter-spacing: 0.3px; }
   .sidebar { width: 250px; flex-shrink: 0; padding-left: 24px; }
   .legend { margin-bottom: 18px; }
@@ -42,12 +41,12 @@
   .toggle-btn { flex: 1; padding: 5px 6px; font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; border: 1px solid #ddd; background: white; cursor: pointer; font-family: Georgia, serif; }
   .toggle-btn.active { background: #0D1B2A; color: white; border-color: #0D1B2A; }
   .opacity-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; font-size: 0.7rem; color: #888; }
-  .opacity-row input { flex: 1; }
+  .opacity-row input { flex: 1; min-width: 0; }
   .note { font-size: 0.66rem; color: #aaa; line-height: 1.5; margin-top: 12px; }
   @media (max-width: 700px) {
-    .map-container { flex-direction: column; padding: 14px; }
-    .sidebar { width: 100%; padding-left: 0; padding-top: 16px; }
-    #map { height: 460px; }
+    .map-container { flex-direction: column; padding: 14px; gap: 16px; }
+    #map { width: 100%; height: 420px; flex: 0 0 auto; }
+    .sidebar { width: 100%; padding-left: 0; }
   }
 </style>
 </head>
@@ -73,10 +72,10 @@
       <div class="legend-scale" id="legend-scale"></div>
     </div>
     <div class="tooltip-panel" id="tooltip-panel">
-      <div class="placeholder">Hover a precinct to see details</div>
+      <div class="placeholder">Tap or hover a precinct for details</div>
     </div>
     <div class="note">
-      Streets and landmarks underneath. Adjust the slider to see streets more clearly.<br><br>
+      Streets and landmarks underneath. Slide left to see streets clearly, right to emphasize colors.<br><br>
       Total registered: <strong>123,945</strong> · City Dem avg: <strong>28.3%</strong>
     </div>
   </div>
@@ -113,29 +112,17 @@ function getColor(val, m) {
   return s.colors[0];
 }
 
-// Initialize Leaflet map centered on Providence
-const map = L.map('map', { 
-  center: [41.823, -71.418], 
-  zoom: 12, 
-  scrollWheelZoom: true,
-  zoomControl: true,
-  attributionControl: true
-});
+const map = L.map('map', { center: [41.823, -71.418], zoom: 12, scrollWheelZoom: true, zoomControl: true });
 
-// Use Carto Positron — clean, light street basemap (NYT-like aesthetic)
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-  subdomains: 'abcd',
-  maxZoom: 19
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OSM</a> © <a href="https://carto.com/attributions">CARTO</a>',
+  subdomains: 'abcd', maxZoom: 19
 }).addTo(map);
 
-// Precinct GeoJSON layer
 function styleFn(feature) {
   return {
     fillColor: getColor(feature.properties[colorScales[mode].field], mode),
-    weight: 0.5,
-    color: 'rgba(0,0,0,0.3)',
-    fillOpacity: fillOpacity
+    weight: 0.5, color: 'rgba(0,0,0,0.3)', fillOpacity: fillOpacity
   };
 }
 
@@ -143,9 +130,7 @@ const precinctLayer = L.geoJSON(geojson, {
   style: styleFn,
   onEachFeature: function(feature, layer) {
     const p = feature.properties;
-    layer.on('mouseover', function() {
-      this.setStyle({ weight: 2, color: '#000', fillOpacity: Math.min(fillOpacity + 0.2, 0.95) });
-      this.bringToFront();
+    function showInfo() {
       const diff = (p.dem_turnout - cityDemAvg).toFixed(1);
       const diffStr = diff > 0 ? `+${diff}` : diff;
       const signal = p.dem_turnout >= 45 ? '🔴 High turnout' : p.dem_turnout <= 15 ? '⚪ Low turnout' : '🟡 Near avg';
@@ -171,22 +156,31 @@ const precinctLayer = L.geoJSON(geojson, {
         ${polling}
         <div class="context">${diffStr}pp vs. city avg · ${signal}</div>
       `;
+    }
+    layer.on('mouseover', function() {
+      this.setStyle({ weight: 2, color: '#000', fillOpacity: Math.min(fillOpacity + 0.2, 0.95) });
+      this.bringToFront();
+      showInfo();
     });
     layer.on('mouseout', function() {
       precinctLayer.resetStyle(this);
     });
+    layer.on('click', showInfo); // for mobile tap
   }
 }).addTo(map);
 
-// Fit bounds to Providence precincts
 map.fitBounds(precinctLayer.getBounds(), { padding: [10, 10] });
 
-// Neighborhood labels - calculate centroid in lat/lon
+// Force Leaflet to recompute size after layout settles (fixes mobile rendering)
+setTimeout(() => map.invalidateSize(), 200);
+window.addEventListener('resize', () => map.invalidateSize());
+window.addEventListener('load', () => map.invalidateSize());
+
+// Neighborhood labels
 const neighborhoods = {};
 geojson.features.forEach(f => {
   const hood = f.properties.neighborhood;
-  if (!neighborhoods[hood]) neighborhoods[hood] = { coords: [], count: 0 };
-  // Get geometric centroid of this precinct
+  if (!neighborhoods[hood]) neighborhoods[hood] = { coords: [] };
   const coords = f.geometry.coordinates[0];
   let lat = 0, lon = 0;
   coords.forEach(c => { lon += c[0]; lat += c[1]; });
@@ -198,31 +192,29 @@ Object.entries(neighborhoods).forEach(([hood, data]) => {
   const lat = data.coords.reduce((s, c) => s + c[0], 0) / data.coords.length;
   const lon = data.coords.reduce((s, c) => s + c[1], 0) / data.coords.length;
   L.marker([lat, lon], {
-    icon: L.divIcon({
-      className: 'hood-label-leaf',
-      html: hood.toUpperCase(),
-      iconSize: [120, 16],
-      iconAnchor: [60, 8]
-    }),
-    interactive: false,
-    keyboard: false
+    icon: L.divIcon({ className: 'hood-label-leaf', html: hood.toUpperCase(), iconSize: [120, 16], iconAnchor: [60, 8] }),
+    interactive: false, keyboard: false
   }).addTo(map);
 });
 
-// Toggle mode
 function setMode(m) {
   mode = m;
   document.getElementById('btn-dem').classList.toggle('active', m === 'dem');
   document.getElementById('btn-total').classList.toggle('active', m === 'total');
   document.getElementById('legend-title').textContent = colorScales[m].title;
-  precinctLayer.setStyle(styleFn);
+  precinctLayer.eachLayer(layer => {
+    const f = layer.feature;
+    layer.setStyle({
+      fillColor: getColor(f.properties[colorScales[m].field], m),
+      fillOpacity: fillOpacity, weight: 0.5, color: 'rgba(0,0,0,0.3)'
+    });
+  });
   buildLegend();
 }
 
-// Opacity slider
 document.getElementById('opacity-slider').addEventListener('input', function(e) {
-  fillOpacity = e.target.value / 100;
-  precinctLayer.setStyle(styleFn);
+  fillOpacity = parseInt(e.target.value, 10) / 100;
+  precinctLayer.eachLayer(layer => layer.setStyle({ fillOpacity: fillOpacity }));
 });
 
 function buildLegend() {
