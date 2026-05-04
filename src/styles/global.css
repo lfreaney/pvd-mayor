@@ -440,3 +440,15 @@ img { max-width: 100%; display: block; }
   .site-nav { gap: 16px; }
   .issue-grid { grid-template-columns: 1fr; }
 }
+
+.lang-toggle {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  padding: 3px 8px;
+  border: 1px solid var(--ink-faint);
+  color: var(--ink-faint) !important;
+  border-radius: 3px;
+  margin-left: 4px;
+}
+.lang-toggle:hover { border-color: var(--ink); color: var(--ink) !important; }

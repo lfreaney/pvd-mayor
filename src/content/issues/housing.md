@@ -1,6 +1,8 @@
 ---
 title: Housing & Affordability
 summary: Your rent went up faster last year than almost anywhere in the country. A typical Providence household now needs $476 more per month than they can actually afford. Two candidates, two very different answers — and one already blocked the other's.
+title_es: "Vivienda y Asequibilidad"
+summary_es: Tu renta subió más rápido el año pasado que en casi cualquier otra ciudad del país. Una familia típica de Providence necesita $476 más al mes de lo que realmente puede pagar. Dos candidatos, dos respuestas muy distintas — y uno ya bloqueó la propuesta del otro.
 order: 1
 salience: high
 stat: "Rents up 12.6% in 2024"

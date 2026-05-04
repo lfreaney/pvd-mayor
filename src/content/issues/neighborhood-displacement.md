@@ -1,6 +1,8 @@
 ---
 title: Neighborhood Development & Displacement
 summary: In South Providence, Olneyville, and the West End, longtime residents are being pushed out. Rising rents, changing neighborhoods, disappearing small businesses. This is the human face of the housing crisis — and both candidates have been vague about how to stop it.
+title_es: "Desplazamiento de Vecindarios"
+summary_es: En South Providence, Olneyville y el West End, los residentes de toda la vida están siendo desplazados. Rentas que suben, vecindarios que cambian, negocios pequeños que desaparecen. Esta es la cara humana de la crisis de vivienda — y los dos candidatos han sido vagos sobre cómo detenerla.
 order: 12
 salience: high
 stat: "Displacement accelerating in 6 neighborhoods"

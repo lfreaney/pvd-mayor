@@ -1,6 +1,8 @@
 ---
 title: Food Security & SNAP
 summary: About 23% of Providence residents — including 16,000 children — depend on federal food benefits. The Trump administration is cutting them. The mayor can't stop that alone, but how they respond right now matters.
+title_es: "Seguridad Alimentaria"
+summary_es: Aproximadamente el 23% de los residentes de Providence — incluyendo 16,000 niños — dependen de beneficios federales de alimentación. La administración Trump los está recortando. El alcalde no puede detenerlo solo, pero cómo responde ahora importa mucho.
 order: 7
 salience: high
 stat: "23% of residents on SNAP"

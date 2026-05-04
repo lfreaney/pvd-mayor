@@ -1,6 +1,8 @@
 ---
 title: Economic Development
 summary: Providence is developing — downtown, the Jewelry District, the 195 parcels. The question is who benefits. Without community benefits requirements built into deals, the answer is mostly developers. The last major 195 parcels are being decided now.
+title_es: "Desarrollo Económico"
+summary_es: Providence está en pleno desarrollo — el centro, el Distrito Joyero, las parcelas del 195. La pregunta es quién se beneficia. Sin requisitos de beneficios comunitarios incorporados en los acuerdos, la respuesta es principalmente los desarrolladores. Las últimas parcelas importantes del 195 se están decidiendo ahora.
 order: 11
 salience: medium
 stat: "195 District: last major parcels remaining"

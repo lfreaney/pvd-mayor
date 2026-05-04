@@ -1,6 +1,8 @@
 ---
 title: Public Safety & Police Accountability
 summary: Violent crime is at its lowest level since 1990. That's real progress and it should be acknowledged. But it's not spread evenly across the city — and the next police union contract will determine how much either candidate can actually change.
+title_es: "Seguridad Pública"
+summary_es: El crimen violento está en su nivel más bajo desde 1990. Es un progreso real y merece reconocimiento. Pero no está distribuido de manera uniforme en toda la ciudad — y el próximo contrato del sindicato policial determinará cuánto puede cambiar cualquiera de los dos candidatos.
 order: 6
 salience: medium
 stat: "Violent crime lowest since 1990"

@@ -1,6 +1,8 @@
 ---
 title: Public Schools
 summary: The state took over Providence schools in 2019 and still runs them today. The city writes a $146.5 million check every year — but doesn't make the decisions. Seven years in, no one has published an exit timeline.
+title_es: "Escuelas Públicas"
+summary_es: El estado tomó el control de las escuelas de Providence en 2019 y las sigue administrando hoy. La ciudad escribe un cheque de $146.5 millones al año — pero no toma las decisiones. Siete años después, nadie ha publicado un cronograma de salida.
 order: 5
 salience: structural
 stat: "7 yrs state receivership"

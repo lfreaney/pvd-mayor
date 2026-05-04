@@ -1,6 +1,8 @@
 ---
 title: Climate & Environment
 summary: Parts of Providence flood when it rains hard. Other parts bake in the summer heat. The burden falls hardest on lower-income neighborhoods. Both candidates acknowledge the problem. Neither has funded a real solution.
+title_es: "Clima y Medio Ambiente"
+summary_es: Partes de Providence se inundan cuando llueve fuerte. Otras partes se recalientan en el verano. La carga cae con más fuerza sobre los barrios de bajos ingresos. Los dos candidatos reconocen el problema. Ninguno ha financiado una solución real.
 order: 9
 salience: medium
 stat: "Stormwater & heat: unaddressed"

@@ -22,7 +22,9 @@ const issues = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
+    title_es: z.string().optional(),
     summary: z.string(),
+    summary_es: z.string().optional(),
     order: z.number().optional(),
     updated: z.string().optional(),
     salience: z.enum(['high', 'medium', 'structural']).optional(),

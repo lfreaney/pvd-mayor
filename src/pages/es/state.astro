@@ -1,0 +1,202 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="La Ciudad — Providence 2026" currentPath="/es/state" lang="es">
+  <div class="hero-stripe">
+    <div class="container">
+      <h1>El estado de la ciudad</h1>
+      <p class="subtitle">Lo que está pasando en Providence ahora mismo. Empieza con el titular. Profundiza cuando quieras.</p>
+      <p class="meta">Todos los datos tienen fuentes · Actualizado en abril de 2026</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:80px;">
+
+    <div class="section-rule"><span>De un vistazo</span></div>
+    <p style="font-size:0.82rem;color:var(--ink-faint);margin-bottom:20px;">Haz clic en cualquier indicador para saber más.</p>
+
+    <div class="dashboard">
+      <a href="#housing" class="dash-card" onclick="openSection('housing')">
+        <div class="dash-signal red"></div>
+        <div class="dash-number">+12.6%</div>
+        <div class="dash-label">Aumento de renta en 2024</div>
+        <div class="dash-sub">El mayor de cualquier metro de EE.UU.</div>
+      </a>
+      <a href="#budget" class="dash-card" onclick="openSection('budget')">
+        <div class="dash-signal red"></div>
+        <div class="dash-number">~35%</div>
+        <div class="dash-label">Propiedades sin pagar impuestos</div>
+        <div class="dash-sub">Universidades, hospitales, ONG</div>
+      </a>
+      <a href="#safety" class="dash-card" onclick="openSection('safety')">
+        <div class="dash-signal green"></div>
+        <div class="dash-number">−10%</div>
+        <div class="dash-label">Crimen violento en 2024</div>
+        <div class="dash-sub">Nivel más bajo desde 1990</div>
+      </a>
+      <a href="#schools" class="dash-card" onclick="openSection('schools')">
+        <div class="dash-signal red"></div>
+        <div class="dash-number">7 años</div>
+        <div class="dash-label">Control estatal de las escuelas</div>
+        <div class="dash-sub">Sin cronograma de salida</div>
+      </a>
+      <a href="#transit" class="dash-card" onclick="openSection('transit')">
+        <div class="dash-signal amber"></div>
+        <div class="dash-number">−13%</div>
+        <div class="dash-label">Pasajeros RIPTA vs. 2019</div>
+        <div class="dash-sub">Aún por debajo de antes de la pandemia</div>
+      </a>
+      <a href="#food" class="dash-card" onclick="openSection('food')">
+        <div class="dash-signal red"></div>
+        <div class="dash-number">23%</div>
+        <div class="dash-label">Residentes con beneficios SNAP</div>
+        <div class="dash-sub">Recortes federales en curso</div>
+      </a>
+    </div>
+
+    <div style="display:flex;gap:20px;margin:16px 0 40px;font-size:0.72rem;color:var(--ink-faint);">
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#C8102E;display:inline-block;"></span>Crisis / urgente</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#E8A020;display:inline-block;"></span>Preocupante</span>
+      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;border-radius:50%;background:#2D9B5A;display:inline-block;"></span>Avanzando en la dirección correcta</span>
+    </div>
+
+    <div class="section-rule"><span>La historia detrás de los números</span></div>
+
+    <div class="accordion">
+      <div class="acc-item" id="housing">
+        <div class="acc-header">
+          <div class="acc-left"><span class="acc-title">Vivienda</span><span class="acc-pill" style="background:#FCEBEB;color:#791F1F;">Crisis</span></div>
+          <div class="acc-meta">Rentas +12.6% en 2024 · El mayor aumento de cualquier metro de EE.UU.</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">Las rentas en Providence subieron más rápido que en cualquier ciudad importante de EE.UU. el año pasado. Una familia típica puede pagar aproximadamente $1,675/mes. La renta mediana es $2,145 — una diferencia de $470 cada mes.</p>
+          <div class="sotc-flag">⚠ Ningún candidato ha abordado el factor de la migración desde Boston. Las dos propuestas funcionarían en un horizonte de 5 a 10 años. Los inquilinos de hoy están solos en el corto plazo.</div>
+          <a href="/state#housing" style="font-size:0.78rem;color:var(--pvd-red);">Ver análisis completo (inglés) →</a>
+        </div>
+      </div>
+
+      <div class="acc-item" id="budget">
+        <div class="acc-header">
+          <div class="acc-left"><span class="acc-title">Presupuesto Municipal</span><span class="acc-pill" style="background:#FCEBEB;color:#791F1F;">Presión estructural</span></div>
+          <div class="acc-meta">Los costos fijos suben más rápido de lo que la ciudad puede recaudar impuestos</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">La ciudad no tiene mucho dinero. No es retórica — es estructura. Tres cosas se están comiendo el presupuesto: las pensiones, el financiamiento escolar y los gastos de salud. Juntos suben más rápido de lo que la ley permite aumentar los impuestos.</p>
+          <div class="sotc-flag">⚠ El presupuesto municipal está estructuralmente limitado de formas que ningún candidato reconoce plenamente. Cada dólar gastado en algo es un dólar que no se gasta en otra cosa.</div>
+          <a href="/state#budget" style="font-size:0.78rem;color:var(--pvd-red);">Ver análisis completo (inglés) →</a>
+        </div>
+      </div>
+
+      <div class="acc-item" id="safety">
+        <div class="acc-header">
+          <div class="acc-left"><span class="acc-title">Seguridad Pública</span><span class="acc-pill" style="background:#EAF3DE;color:#27500A;">Mejorando</span></div>
+          <div class="acc-meta">Crimen violento al nivel más bajo en 30 años · Progreso real pero desigual</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">El crimen violento bajó un 10% en 2024, al nivel más bajo desde 1990. Es una buena noticia real. Pero es un promedio para toda la ciudad — algunos barrios siguen sintiéndose muy distintos a ese número.</p>
+          <div class="sotc-flag">⚠ La tendencia es buena. La línea de base sigue por encima del promedio nacional. Y ningún candidato ha abordado el próximo contrato del sindicato policial.</div>
+          <a href="/state#safety" style="font-size:0.78rem;color:var(--pvd-red);">Ver análisis completo (inglés) →</a>
+        </div>
+      </div>
+
+      <div class="acc-item" id="schools">
+        <div class="acc-header">
+          <div class="acc-left"><span class="acc-title">Escuelas Públicas</span><span class="acc-pill" style="background:#FCEBEB;color:#791F1F;">Control estatal</span></div>
+          <div class="acc-meta">7 años bajo control estatal · Sin cronograma de salida</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">El estado administra las escuelas de Providence desde 2019. La ciudad paga $146.5 millones al año — pero no toma las decisiones sobre programas, personal u operaciones. Siete años después, no hay ningún plan publicado sobre cuándo cambia eso.</p>
+          <div class="sotc-flag">⚠ El alcalde puede abogar y financiar construcción. Pero las escuelas las administra el estado. Cualquier promesa educativa está limitada por esto.</div>
+          <a href="/state#schools" style="font-size:0.78rem;color:var(--pvd-red);">Ver análisis completo (inglés) →</a>
+        </div>
+      </div>
+
+      <div class="acc-item" id="transit">
+        <div class="acc-header">
+          <div class="acc-left"><span class="acc-title">Transporte</span><span class="acc-pill" style="background:#FFF8E7;color:#633806;">Bajo presupuesto</span></div>
+          <div class="acc-meta">23% de hogares sin auto · RIPTA aún por debajo de antes de la pandemia</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">Casi uno de cada cuatro hogares en Providence no tiene auto. Dependen de RIPTA — una agencia estatal que el alcalde no puede controlar directamente. Los pasajeros todavía no se han recuperado de 2020 y la brecha de financiamiento es real.</p>
+          <div class="sotc-flag">⚠ La autoridad directa del alcalde sobre el tránsito se limita a calles locales e infraestructura peatonal. RIPTA es una batalla presupuestaria estatal. Ningún candidato ha explicado cómo va a ganar esa batalla.</div>
+          <a href="/state#transit" style="font-size:0.78rem;color:var(--pvd-red);">Ver análisis completo (inglés) →</a>
+        </div>
+      </div>
+
+      <div class="acc-item" id="food">
+        <div class="acc-header">
+          <div class="acc-left"><span class="acc-title">Seguridad Alimentaria</span><span class="acc-pill" style="background:#FCEBEB;color:#791F1F;">Bajo presión federal</span></div>
+          <div class="acc-meta">23% con SNAP · 16,000 niños afectados por recortes</div>
+          <span class="acc-chevron">▼</span>
+        </div>
+        <div class="acc-body">
+          <p class="level-one">Aproximadamente el 23% de los residentes de Providence depende de beneficios federales de alimentación. La administración Trump los está recortando. El alcalde no puede detenerlo solo — pero cómo responde la ciudad a una reducción federal sostenida importa mucho.</p>
+          <div class="sotc-flag">⚠ Esto es una emergencia presente, no un riesgo futuro. Ningún candidato ha especificado cómo sería un plan municipal de emergencia alimentaria ni cuánto costaría.</div>
+          <a href="/state#food" style="font-size:0.78rem;color:var(--pvd-red);">Ver análisis completo (inglés) →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+.dashboard { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; margin-bottom: 8px; }
+.dash-card { background: var(--bg-white); border: 1px solid var(--rule); padding: 18px 16px; text-decoration: none; color: var(--ink); display: block; transition: border-color 0.15s, box-shadow 0.15s; }
+.dash-card:hover { border-color: var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+.dash-signal { width: 8px; height: 8px; border-radius: 50%; margin-bottom: 10px; }
+.dash-signal.red { background: #C8102E; }
+.dash-signal.amber { background: #E8A020; }
+.dash-signal.green { background: #2D9B5A; }
+.dash-number { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.6rem; line-height: 1; margin-bottom: 6px; }
+.dash-label { font-size: 0.78rem; font-weight: 500; line-height: 1.3; margin-bottom: 4px; }
+.dash-sub { font-size: 0.7rem; color: var(--ink-faint); line-height: 1.3; }
+.accordion { display: flex; flex-direction: column; gap: 8px; }
+.acc-item { border: 1px solid var(--rule); background: var(--bg-white); }
+.acc-header { display: flex; align-items: center; gap: 16px; padding: 18px 24px; cursor: pointer; user-select: none; }
+.acc-header:hover { background: #F5F4F1; }
+.acc-left { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.acc-title { font-family: 'DM Serif Display', Georgia, serif; font-size: 1.1rem; font-weight: 400; }
+.acc-pill { font-size: 0.68rem; font-weight: 600; padding: 3px 9px; border-radius: 20px; letter-spacing: 0.03em; white-space: nowrap; }
+.acc-meta { font-size: 0.78rem; color: var(--ink-faint); flex: 1; }
+.acc-chevron { font-size: 0.65rem; color: var(--ink-faint); transition: transform 0.18s; flex-shrink: 0; }
+.acc-chevron.open { transform: rotate(180deg); }
+.acc-body { display: none; border-top: 1px solid var(--rule); padding: 20px 24px; }
+.acc-body.open { display: block; }
+.level-one { font-size: 0.95rem; line-height: 1.7; color: var(--ink); margin: 0 0 16px; font-style: italic; }
+.sotc-flag { background: #FFF8E7; border-left: 3px solid var(--pvd-gold); padding: 10px 14px; font-size: 0.83rem; line-height: 1.6; color: var(--ink); margin: 0 0 12px; }
+@media (max-width: 600px) {
+  .dashboard { grid-template-columns: 1fr 1fr; }
+  .acc-meta { display: none; }
+  .acc-header, .acc-body { padding: 14px 16px; }
+}
+</style>
+
+<script>
+  function openSection(id: string) {
+    const item = document.getElementById(id);
+    if (!item) return;
+    const body = item.querySelector('.acc-body') as HTMLElement;
+    const chev = item.querySelector('.acc-chevron') as HTMLElement;
+    if (body && !body.classList.contains('open')) {
+      body.classList.add('open');
+      chev?.classList.add('open');
+    }
+  }
+  (window as any).openSection = openSection;
+
+  document.querySelectorAll('.acc-header').forEach(header => {
+    header.addEventListener('click', () => {
+      const body = header.nextElementSibling as HTMLElement;
+      const chev = header.querySelector('.acc-chevron') as HTMLElement;
+      const isOpen = body.classList.contains('open');
+      document.querySelectorAll('.acc-body').forEach(b => b.classList.remove('open'));
+      document.querySelectorAll('.acc-chevron').forEach(c => c.classList.remove('open'));
+      if (!isOpen) { body.classList.add('open'); chev.classList.add('open'); }
+    });
+  });
+</script>

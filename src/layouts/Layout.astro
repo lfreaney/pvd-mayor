@@ -3,11 +3,14 @@ interface Props {
   title: string;
   description?: string;
   currentPath?: string;
+  lang?: string;
 }
-const { title, description = "An independent analytical resource on the 2026 Providence mayoral race.", currentPath = "/" } = Astro.props;
+const { title, description = "An independent analytical resource on the 2026 Providence mayoral race.", currentPath = "/", lang = "en" } = Astro.props;
+const isEs = lang === "es";
+const altLangPath = isEs ? currentPath.replace(/^\/es/, '') || '/' : '/es' + currentPath;
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,11 +24,19 @@ const { title, description = "An independent analytical resource on the 2026 Pro
       <div class="inner">
         <a href="/" class="site-logo">PVD <span>MAYOR</span> 2026</a>
         <nav class="site-nav">
-          <a href="/" class={currentPath === "/" ? "active" : ""}>Issues</a>
-          <a href="/state" class={currentPath === "/state" ? "active" : ""}>State of the City</a>
-          <a href="/data" class={currentPath === "/data" ? "active" : ""}>The Data</a>
-          <a href="/candidates" class={currentPath === "/candidates" ? "active" : ""}>Candidates</a>
-          <a href="/methodology" class={currentPath === "/methodology" ? "active" : ""}>Methodology</a>
+          {isEs ? <>
+            <a href="/es" class={currentPath === "/es" ? "active" : ""}>Temas</a>
+            <a href="/es/state" class={currentPath === "/es/state" ? "active" : ""}>La Ciudad</a>
+            <a href="/es/data" class={currentPath === "/es/data" ? "active" : ""}>Los Datos</a>
+            <a href="/es/candidates" class={currentPath === "/es/candidates" ? "active" : ""}>Candidatos</a>
+          </> : <>
+            <a href="/" class={currentPath === "/" ? "active" : ""}>Issues</a>
+            <a href="/state" class={currentPath === "/state" ? "active" : ""}>State of the City</a>
+            <a href="/data" class={currentPath === "/data" ? "active" : ""}>The Data</a>
+            <a href="/candidates" class={currentPath === "/candidates" ? "active" : ""}>Candidates</a>
+            <a href="/methodology" class={currentPath === "/methodology" ? "active" : ""}>Methodology</a>
+          </>}
+          <a href={altLangPath} class="lang-toggle">{isEs ? 'EN' : 'ES'}</a>
         </nav>
       </div>
     </div>
@@ -38,10 +49,10 @@ const { title, description = "An independent analytical resource on the 2026 Pro
   <footer class="site-footer">
     <div class="container">
       <div class="inner">
-        <span>Independent. Not affiliated with any campaign. Maintained by <a href="/methodology" style="color:inherit;text-decoration:underline;">Liam Freaney</a>.</span>
+        <span>{isEs ? 'Independiente. Sin afiliación con ninguna campaña. Elaborado por' : 'Independent. Not affiliated with any campaign. Maintained by'} <a href={isEs ? '/es' : '/methodology'} style="color:inherit;text-decoration:underline;">Liam Freaney</a>.</span>
         <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;">
-          <span>Primary: Sept 9 · General: Nov 3, 2026</span>
-          <a href="https://ko-fi.com/lfreaney" target="_blank" rel="noopener" style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--pvd-red);border:1px solid var(--pvd-red);padding:4px 10px;border-radius:3px;white-space:nowrap;">Support this site</a>
+          <span>{isEs ? 'Primaria: 9 sep · General: 3 nov, 2026' : 'Primary: Sept 9 · General: Nov 3, 2026'}</span>
+          <a href="https://ko-fi.com/lfreaney" target="_blank" rel="noopener" style="font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--pvd-red);border:1px solid var(--pvd-red);padding:4px 10px;border-radius:3px;white-space:nowrap;">{isEs ? 'Apoyar este sitio' : 'Support this site'}</a>
         </div>
       </div>
     </div>

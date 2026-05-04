@@ -1,6 +1,8 @@
 ---
 title: Labor & City Workers
 summary: City workers are paid less than their counterparts in peer cities. That means more turnover, shorter-staffed departments, and worse services for residents. The next mayor will negotiate multiple union contracts. This is where promises meet math.
+title_es: "Trabajo y Empleados Municipales"
+summary_es: Los empleados municipales ganan menos que sus pares en ciudades comparables. Eso significa más rotación, departamentos con menos personal y peores servicios para los residentes. El próximo alcalde negociará varios contratos sindicales. Aquí es donde las promesas se enfrentan a las matemáticas.
 order: 10
 salience: medium
 stat: "Multiple union contracts up for renewal"

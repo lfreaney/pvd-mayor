@@ -1,6 +1,8 @@
 ---
 title: Arts, Culture & Creative Economy
 summary: Providence has more working artists per capita than almost any city its size. Rising rents are pushing them out. Neither candidate has a real plan to stop it — and the city's cultural identity is at stake.
+title_es: "Arte y Cultura"
+summary_es: Providence tiene más artistas activos per cápita que casi cualquier ciudad de su tamaño. El aumento de las rentas los está expulsando. Ningún candidato tiene un plan real para detenerlo — y la identidad cultural de la ciudad está en juego.
 order: 8
 salience: medium
 stat: "RISD + Brown = unique cultural density"

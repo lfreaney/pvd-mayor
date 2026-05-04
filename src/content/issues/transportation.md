@@ -1,6 +1,8 @@
 ---
 title: Transportation & Infrastructure
 summary: Almost one in four Providence households doesn't own a car. They depend on RIPTA — a state agency the mayor can't actually control. Both candidates promise better transit. Neither has explained how.
+title_es: "Transporte"
+summary_es: Casi uno de cada cuatro hogares en Providence no tiene auto. Dependen de RIPTA — una agencia estatal que el alcalde no controla directamente. Los dos candidatos prometen mejor transporte. Ninguno ha explicado cómo.
 order: 3
 salience: medium
 stat: "RIPTA funding gap unresolved"

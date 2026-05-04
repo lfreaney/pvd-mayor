@@ -1,6 +1,8 @@
 ---
 title: Immigration & Sanctuary City Policy
 summary: ICE enforcement has intensified across the country. Providence's sanctuary policies protect residents — but they're under federal pressure. Both candidates say they'll defend them. The real question is what they're willing to fight for.
+title_es: "Inmigración"
+summary_es: La aplicación de las leyes migratorias federales se ha intensificado en todo el país. Las políticas de santuario de Providence protegen a los residentes — pero están bajo presión federal. Los dos candidatos dicen que las defenderán. La verdadera pregunta es por qué están dispuestos a luchar.
 order: 4
 salience: high
 stat: "Policies intact under pressure"

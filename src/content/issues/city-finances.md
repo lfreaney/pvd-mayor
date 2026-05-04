@@ -1,6 +1,8 @@
 ---
 title: City Finances & Budget
 summary: "The city is caught in a squeeze: costs keep rising but state law caps how much it can raise taxes. About a third of Providence property pays no taxes at all — universities, hospitals, nonprofits. This shapes everything else."
+title_es: "Finanzas Municipales"
+summary_es: "La ciudad está atrapada en una presión estructural: los costos siguen subiendo pero la ley estatal limita cuánto puede aumentar los impuestos. Cerca de un tercio de las propiedades de Providence no paga impuestos — universidades, hospitales, organizaciones sin fines de lucro. Esto afecta todo lo demás."
 order: 2
 salience: structural
 stat: "$21M+ fixed cost increase"
